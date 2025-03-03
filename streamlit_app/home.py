@@ -4,6 +4,38 @@ def main():
     # Set the title of the homepage
     st.set_page_config(page_title="Home", page_icon=":house:")
     st.title("Automated Daily Trading System")
+
+   # Layout
+    st.markdown(
+    f"""
+    <style>
+        .stApp {{
+            background-color: #002149;
+        }}
+        h1 {{
+            color: #617050;
+        }}
+        h2 {{
+            color: #05CC77;
+        }}
+        h3 {{
+            color: #05CC77;
+        }}
+        .stTextInput>div>div>input {{
+            background-color: #004080;
+            color: white;
+            border-radius: 5px;
+        }}
+        .stButton>button {{
+            background-color: #05CC77;
+            color: white;
+            font-weight: bold;
+        }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+   
     
 
     # Project Overview
