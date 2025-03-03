@@ -14,7 +14,7 @@ def load_data():
     """
     try:
         df = pd.read_csv(
-            "data/us-shareprices-daily.zip", 
+            "../data/us-shareprices-daily.zip", 
             sep=";",
             usecols=["Ticker", "Date", "Close"],  # Load only necessary columns
             dtype={"Ticker": "category", "Close": "float32"},  # Optimize memory usage
