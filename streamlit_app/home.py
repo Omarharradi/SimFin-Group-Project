@@ -13,7 +13,7 @@ def main():
             background-color: #002149;
         }}
         h1 {{
-            color: #617050;
+            color: #F2F3F4;
         }}
         h2 {{
             color: #05CC77;
