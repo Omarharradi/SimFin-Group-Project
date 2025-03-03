@@ -5,7 +5,7 @@ def main():
     st.set_page_config(page_title="Home", page_icon=":house:")
     st.title("Automated Daily Trading System")
 
-   # Layout
+    # Layout
     st.markdown(
     f"""
     <style>
@@ -36,6 +36,7 @@ def main():
     unsafe_allow_html=True
 )
    
+   # Logo
     
 
     # Project Overview
