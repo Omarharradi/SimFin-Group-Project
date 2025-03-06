@@ -10,6 +10,13 @@ def main():
     # Set the title of the homepage
     st.set_page_config(page_title="Home", page_icon=":house:")
 
+    # Sidebar Navigation
+    st.sidebar.title("📌 Main Menu")
+    st.sidebar.page_link("home.py", label="Home", icon="🏠")
+    st.sidebar.page_link("pages/go_live_v3_1.py", label="Prediction", icon="📊")
+    st.sidebar.page_link("pages/company_info.py", label="Ticker Overview", icon="🏢")
+
+
     # Path to the logo image
     logo_path = "logo.png"  # Ensure this path is correct
     logo_base64 = get_base64_of_image(logo_path)
@@ -94,7 +101,7 @@ def main():
                 <img src="data:image/png;base64,{logo_base64}" alt="Company Logo">
             </div>
             <div class="title">
-                Welcome to Foresighx
+                Welcome to Foresightx
             </div>
         </div>
 
@@ -110,37 +117,27 @@ def main():
     
     
     #  Quick Overview of the App
-    st.header("How do we work?")
+    st.header("Overview of the App")
     st.write(
         "Predicts if a stock price will rise or fall using Machine Learning"
         "\n- Provides real-time stock market data"
         "\n- Suggests Buy, Sell, or Hold decisions"
     )
     
+    st.header("Easy Steps to Get Started")
+    st.write("✅ **Step 1:** Go to the 'Predictor' page and select the ticker (AAPL, MSFT, BRO, FAST, and ODFL).")
+    st.write("✅ **Step 2:** View real-time stock data & our AI-powered prediction.")
+    st.write("✅ **Step 3:** Check trading recommendations for next day.")
+    st.write("✅ **Step 4:** Review the past performance.")
+
     # Team Information
     st.header("Development Team")
-    st.write("This project is developed by our group as part of a school assignment. Our team is divided into two parts:")
+    st.write("🔍 This project is developed by our group as part of a school assignment. Our team is divided into two parts:")
     st.markdown("- **ML Team**: Responsible for building the predictive model using historical stock data.")
     st.markdown("- **DEV Team**: Responsible for building the Streamlit application and integrating the ML model.")
     
-    # System Purpose and Objectives
-    st.header("System Purpose and Objectives")
-    st.write(
-        "This trading system is designed to:"
-        "\n- Extract and preprocess financial data from SimFin."
-        "\n- Develop machine learning models to predict stock price movements."
-        "\n- Provide users with an interactive web interface to visualize predictions and trading signals."
-        "\n- Deploy the application in a cloud environment for accessibility."
-    )
-    
-    # Instructions for Navigation
-    st.header("How to Use the Application")
-    st.write(
-        "\n- Navigate to the **'Go Live'** page to analyze stocks and view predictions."
-        "\n- Select a stock ticker to retrieve financial data and predictions."
-        "\n- Explore various analytics and model insights provided by the system."
-    )
-    
+    st.markdown("📧 Have feedback? Reach out to us!")
+
     # Footer with contact information (optional)
     st.markdown("---")
     st.write("For any inquiries, please reach out to our development team.")
