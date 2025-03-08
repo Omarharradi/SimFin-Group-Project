@@ -6,6 +6,7 @@ import requests
 from datetime import datetime, timedelta
 import json
 import streamlit as st
+import base64
 
 def fetch_latest_ohlc(tickers):
     """
@@ -87,38 +88,94 @@ class PySimFin:
         df = pd.DataFrame(rows, columns=columns)
         return df
     
-import streamlit as st
+#  Sets the custom page configuration for the app.
+    def set_custom_page_config(title="ForesightX", icon="📌"):
+        st.set_page_config(
+            page_title=title,
+            page_icon=icon,
+            layout="wide",
+            initial_sidebar_state="collapsed"
+        )
 
-def set_custom_page_config(title="ForesightX", icon="📌"):
-    """
-    Sets the custom page configuration for the app.
-    """
-    st.set_page_config(
-        page_title=title,
-        page_icon=icon,
-        layout="wide",
-        initial_sidebar_state="collapsed"
-    )
+    # Adds a navigation sidebar for easy access to pages
+    def navigation_bar():
+        with st.sidebar:
+            st.title("📌 Main Menu")
+            st.page_link("home.py", label="🏠 Home")
+            st.page_link("pages/go_live_v4_5.py", label="📊 Prediction")
+            st.page_link("pages/company_info.py", label="🏢 Ticker Overview")
 
-def navigation_bar():
-    """
-    Displays a sidebar navigation menu for the app.
-    """
-    with st.sidebar:
-        st.title("📌 Main Menu")
-        st.page_link("home.py", label="🏠 Home")
-        st.page_link("pages/go_live_v4_5.py", label="📊 Prediction")
-        st.page_link("pages/company_info.py", label="🏢 Ticker Overview")
+    #  Hides Streamlit's default multipage sidebar.
+    def hide_streamlit_sidebar():
+        st.markdown(
+            """
+            <style>
+                [data-testid="stSidebarNav"] {display: none;}
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
 
-def hide_streamlit_sidebar():
-    """
-    Hides Streamlit's default multipage sidebar.
-    """
-    st.markdown(
-        """
-        <style>
-            [data-testid="stSidebarNav"] {display: none;}
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+    # Encodes an image to base64 format
+    def get_base64(image_path):
+        with open(image_path, "rb") as file:
+            return base64.b64encode(file.read()).decode()
+
+    # Applies global styling for the app
+    def apply_custom_styles():
+        st.markdown(
+            """
+            <style>
+                .stApp {
+                    background-color: #002149;
+                }
+                .stButton>button {
+                    background-color: #05CC77 !important;
+                    color: white !important;
+                    font-weight: bold;
+                    border-radius: 5px;
+                }
+                .stButton>button:hover {
+                    background-color: #04A76F !important;
+                }
+                h1, h2, h3 {
+                    color: #05CC77;
+                }
+                .stTextInput>div>div>input {
+                    background-color: #004080;
+                    color: white;
+                    border-radius: 5px;
+                }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+
+    # Displays the homepage header with the logo and title
+    def display_home_header(logo_path="logo.png"):
+        logo_base64 = get_base64(logo_path)
+        st.markdown(
+            f"""
+            <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+                <img src="data:image/png;base64,{logo_base64}" width="300">
+                <h1 style="font-size: 60px; font-weight: bold; color: #F2F3F4;">Welcome to ForesightX</h1>
+            </div>
+            <hr style="border: 1px solid #05CC77;">
+            <div style="text-align: center; font-size: 35px; font-weight: bold; color: #05CC77;">Your AI-Powered Stock Prediction Assistant!</div>
+            <hr style="border: 1px solid #05CC77;">
+            """,
+            unsafe_allow_html=True
+        )
+
+    # Displays the logo in the top-left corner above the title
+    def display_top_left_logo_above_title(logo_path="logo.png"):
+        logo_base64 = get_base64(logo_path)
+        st.markdown(
+            f"""
+            <div style="position: absolute; top: 10px; left: 10px;">
+                <img src="data:image/png;base64,{logo_base64}" width="200">
+            </div>
+            <br><br><br><br>  <!-- Adds spacing to prevent overlap with the title -->
+            """,
+            unsafe_allow_html=True
+        )
