@@ -87,9 +87,38 @@ class PySimFin:
         df = pd.DataFrame(rows, columns=columns)
         return df
     
+import streamlit as st
+
+def set_custom_page_config(title="ForesightX", icon="📌"):
+    """
+    Sets the custom page configuration for the app.
+    """
+    st.set_page_config(
+        page_title=title,
+        page_icon=icon,
+        layout="wide",
+        initial_sidebar_state="collapsed"
+    )
+
 def navigation_bar():
-    # Sidebar Navigation
-    st.sidebar.title("📌 Main Menu")
-    st.sidebar.page_link("home.py", label="Home", icon="🏠")
-    st.sidebar.page_link("pages/go_live_v4_5.py", label="Prediction", icon="📊")
-    st.sidebar.page_link("pages /company_info.py", label="Ticker Overview", icon="🏢")
+    """
+    Displays a sidebar navigation menu for the app.
+    """
+    with st.sidebar:
+        st.title("📌 Main Menu")
+        st.page_link("home.py", label="🏠 Home")
+        st.page_link("pages/go_live_v4_5.py", label="📊 Prediction")
+        st.page_link("pages/company_info.py", label="🏢 Ticker Overview")
+
+def hide_streamlit_sidebar():
+    """
+    Hides Streamlit's default multipage sidebar.
+    """
+    st.markdown(
+        """
+        <style>
+            [data-testid="stSidebarNav"] {display: none;}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )

@@ -6,7 +6,11 @@ import utils
 st.set_page_config(page_title="Company Info", page_icon=":fire:", layout="wide")
 st.title(":fire: Company Information")
 
+# Add navigation
 utils.navigation_bar()
+
+# Hide Streamlit's default sidebar
+utils.hide_streamlit_sidebar()
 
 # Initialize API
 API_KEY = "0ce27565-392d-4c49-a438-71e3b39f298f"

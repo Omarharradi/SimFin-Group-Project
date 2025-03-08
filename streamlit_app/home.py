@@ -1,21 +1,23 @@
 import streamlit as st
 import base64
+import utils
+
 
 def get_base64_of_image(image_path):
     """Function to encode the image to base64"""
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode()
 
+# Set page layout first
+utils.set_custom_page_config(title="Home - ForesightX", icon="🏠")
+
+# Add navigation
+utils.navigation_bar()
+
+# Hide Streamlit's default sidebar
+utils.hide_streamlit_sidebar()
+
 def main():
-    # Set the title of the homepage
-    st.set_page_config(page_title="Home", page_icon=":house:")
-
-    # Sidebar Navigation
-    st.sidebar.title("📌 Main Menu")
-    st.sidebar.page_link("home.py", label="Home", icon="🏠")
-    st.sidebar.page_link("pages/go_live_v3_1.py", label="Prediction", icon="📊")
-    st.sidebar.page_link("pages/company_info.py", label="Ticker Overview", icon="🏢")
-
 
     # Path to the logo image
     logo_path = "logo.png"  # Ensure this path is correct
