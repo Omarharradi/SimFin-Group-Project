@@ -3,20 +3,16 @@ import pandas as pd
 import utils
 
 # Streamlit UI Config
-st.set_page_config(page_title="Company Info", page_icon=":fire:", layout="wide")
-st.title(":fire: Company Information")
-
-# Hide Streamlit's default sidebar
+utils.set_custom_page_config(title="Company Information", icon="🏢")
 utils.hide_streamlit_sidebar()
-
- # Applies global styling for the app
+utils.navigation_bar()
 utils.apply_custom_styles()
 
- # Display logo
+# Display large logo in the top-left corner
 utils.display_large_top_left_logo()
 
-# Add navigation
-utils.navigation_bar()
+st.title("🔥 Company Information")
+st.write("This page provides details about selected companies.")
 
 # Initialize API
 API_KEY = "0ce27565-392d-4c49-a438-71e3b39f298f"
