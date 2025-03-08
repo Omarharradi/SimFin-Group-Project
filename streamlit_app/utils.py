@@ -7,7 +7,8 @@ from datetime import datetime, timedelta
 import json
 import streamlit as st
 import base64
-
+import time
+import requests
 
 def fetch_latest_ohlc(tickers):
     """
@@ -131,16 +132,16 @@ def apply_custom_styles():
                 background-color: #002149;
             }
             .stButton>button {
-                background-color: #05CC77 !important;
+                background-color: #2C9795 !important;
                 color: white !important;
                 font-weight: bold;
                 border-radius: 5px;
             }
             .stButton>button:hover {
-                background-color: #04A76F !important;
+                background-color: #2C9795 !important;
             }
             h1, h2, h3 {
-                color: #05CC77;
+                color: #2C9795;
             }
             .stTextInput>div>div>input {
                 background-color: #004080;
@@ -153,7 +154,7 @@ def apply_custom_styles():
     )
 
 # Displays the homepage header with the logo and title
-def display_home_header(logo_path="logo.png"):
+def display_home_header(logo_path="resources/logo.png"):
     logo_base64 = get_base64(logo_path)
     st.markdown(
         f"""
@@ -161,15 +162,15 @@ def display_home_header(logo_path="logo.png"):
             <img src="data:image/png;base64,{logo_base64}" width="300">
             <h1 style="font-size: 60px; font-weight: bold; color: #F2F3F4;">Welcome to ForesightX</h1>
         </div>
-        <hr style="border: 1px solid #05CC77;">
-        <div style="text-align: center; font-size: 35px; font-weight: bold; color: #05CC77;">Your AI-Powered Stock Prediction Assistant!</div>
-        <hr style="border: 1px solid #05CC77;">
+        <hr style="border: 1px solid #2C9795;">
+        <div style="text-align: center; font-size: 35px; font-weight: bold; color: #2C9795;">Your AI-Powered Stock Prediction Assistant!</div>
+        <hr style="border: 1px solid #2C9795;">
         """,
         unsafe_allow_html=True
     )
 
 # Displays the logo in the top-left corner above the title
-def display_top_left_logo_above_title(logo_path="logo.png"):
+def display_top_left_logo_above_title(logo_path="resources/logo.png"):
     logo_base64 = get_base64(logo_path)
     st.markdown(
         f"""
@@ -182,14 +183,40 @@ def display_top_left_logo_above_title(logo_path="logo.png"):
     )
 
 # Displays a larger logo in the top-left corner
-def display_large_top_left_logo(logo_path="logo.png"):
+def display_large_top_left_logo(logo_path="resources/logo.png"):
     logo_base64 = get_base64(logo_path)
     st.markdown(
         f"""
-        <div style="position: absolute; top: 10px; left: 10px;">
+        <div style="position: absolute; top: 1px; left: 1px;">
             <img src="data:image/png;base64,{logo_base64}" width="250">
         </div>
-        <br><br><br><br>  <!-- Adds spacing to prevent overlap -->
+       <br><br><br><br><br><br><br>  <!-- Adds extra space below the logo -->
         """,
         unsafe_allow_html=True
     )
+
+# time retries and delays SinFim API
+def get_company_info(self, tickers: list, max_retries=3, delay=5):
+    base_url = "https://backend.simfin.com/api/v3/companies/general/compact" 
+    ticker_list = ",".join(tickers)
+    url = f"{base_url}?ticker={ticker_list}"  
+    
+    for attempt in range(max_retries):
+        response = requests.get(url, headers=self.headers)
+        
+        if response.status_code == 200:
+            data = response.json()
+            if "columns" in data and "data" in data:
+                return pd.DataFrame(data["data"], columns=data["columns"])
+            else:
+                raise Exception(f"Unexpected API response format: {data}")
+
+        elif response.status_code == 429:
+            # Too many requests - wait and retry
+            wait_time = (attempt + 1) * delay
+            print(f"Rate limit exceeded. Retrying in {wait_time} seconds...")
+            time.sleep(wait_time)
+        else:
+            raise Exception(f"API Error {response.status_code}: {response.text}")
+
+    raise Exception("Max retries reached. API request failed.")
