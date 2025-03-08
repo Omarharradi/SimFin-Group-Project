@@ -121,7 +121,7 @@ def navigation_bar():
         st.title("📌 Main Menu")
         st.page_link("home.py", label="🏠 Home")
         st.page_link("pages/go_live_v4_5.py", label="📊 Prediction")
-        st.page_link("pages/company_info.py", label="🏢 Ticker Overview")
+        st.page_link("pages/company_info_v1.py", label="🏢 Ticker Overview")
 
 # Applies global styling for the app
 def apply_custom_styles():
@@ -163,7 +163,7 @@ def display_home_header(logo_path="resources/logo.png"):
             <h1 style="font-size: 60px; font-weight: bold; color: #F2F3F4;">Welcome to ForesightX</h1>
         </div>
         <hr style="border: 1px solid #2C9795;">
-        <div style="text-align: center; font-size: 35px; font-weight: bold; color: #2C9795;">Your AI-Powered Stock Prediction Assistant!</div>
+        <div style="text-align: center; font-size: 35px; font-weight: bold; color: white;">Your AI-Powered Stock Prediction Assistant!</div>
         <hr style="border: 1px solid #2C9795;">
         """,
         unsafe_allow_html=True
