@@ -1,7 +1,9 @@
 import streamlit as st
 import pandas as pd
 import utils
-import os
+import requests
+from PIL import Image
+from io import BytesIO
 
 # Streamlit UI Config
 utils.set_custom_page_config(title="Company Information", icon="🏢")
@@ -26,13 +28,25 @@ tickers = ["AAPL", "MSFT", "BRO", "FAST", "ODFL"]
 st.markdown("<p style='font-size:22px; color:white;'>Select a Stock Ticker:</p>", unsafe_allow_html=True)
 ticker = st.selectbox("", tickers, index=0, key="selected_ticker")
 
-# Fetch company logo from local resources
 @st.cache_data(ttl=600)
 def fetch_ticker_logo(ticker):
-    logo_path = f"resources/{ticker}_logo.png"
-    if os.path.exists(logo_path):
-        return logo_path
-    return "resources/no_Image_Available.jpg"  # Fallback placeholder image
+    """
+    Fetches the ticker logo from the API. If the API fails, returns the fallback local image.
+    """
+    try:
+        # API Token
+        API_TOKEN = "pk_RQPzczoCTlmAPlHQSCrzJw"
+        API_URL = "https://img.logo.dev/ticker/{ticker}?token=" + API_TOKEN + "&size=100" + "&format=png" #+ "&retina=true"
+        #Ref = https://img.logo.dev/ticker/MSFT?token=pk_RQPzczoCTlmAPlHQSCrzJw&size=300&format=png&retina=true
+        response = requests.get(API_URL.format(ticker=ticker), timeout=5)
+        if response.status_code == 200:
+            return Image.open(BytesIO(response.content))  # Return the image directly
+
+    except requests.RequestException:
+        pass  # If the request fails, continue to the fallback
+
+    # Fallback to local "No Image Available"
+    return Image.open("resources/no_Image_Available.jpg")
 
 # Cache company data to reduce API calls
 @st.cache_data(ttl=600)
@@ -50,12 +64,12 @@ if ticker:
             about = company_info.loc[0, "companyDescription"]
 
             # Fetch the logo from the resources folder
-            logo_path = fetch_ticker_logo(ticker)
+            logo = fetch_ticker_logo(ticker)
             
             # Display company logo next to company name
             col1, col2 = st.columns([1, 4])
             with col1:
-                st.image(logo_path, width=100)
+                st.image(logo, width=100)
             with col2:
                 st.markdown(f"<h2 style='color:white;'>{company_name}</h2>", unsafe_allow_html=True)
 
