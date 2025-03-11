@@ -46,7 +46,7 @@ def fetch_ticker_logo(ticker):
         pass  # If the request fails, continue to the fallback
 
     # Fallback to local "No Image Available"
-    return Image.open("resources/no_Image_Available.jpg")
+    return Image.open("resources/images/no_Image_Available.jpg")
 
 # Cache company data to reduce API calls
 @st.cache_data(ttl=600)

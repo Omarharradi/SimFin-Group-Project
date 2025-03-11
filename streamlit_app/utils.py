@@ -9,6 +9,8 @@ import streamlit as st
 import base64
 import time
 import requests
+import xgboost as xgb
+import joblib
 
 def fetch_latest_ohlc(tickers):
     """
@@ -89,6 +91,57 @@ class PySimFin:
         rows = data["data"]
         df = pd.DataFrame(rows, columns=columns)
         return df
+    
+    def get_predictions(self):
+        tickers = ["AAPL", "MSFT", "BRO", "FAST", "ODFL"]
+        batch_size = 2
+        all_data = []
+
+        for i in range(0, len(tickers), batch_size):
+            batch = tickers[i:i + batch_size]
+            df_tickers = self.get_stock_prices(batch, 1)
+            df_tickers = df_tickers.rename(columns={
+                "Date": "Date", "Opening Price": "Open", "Highest Price": "High",
+                "Lowest Price": "Low", "Last Closing Price": "Close", 
+                "Trading Volume": "Volume", "Adjusted Closing Price": "Adj. Close",
+                "Common Shares Outstanding": "Shares Outstanding"
+            })
+            all_data.append(df_tickers)
+            time.sleep(0.3)
+
+        # Combine all data
+        df_tickers = pd.concat(all_data)
+
+        pivoted_df = df_tickers.pivot(index="Date", columns="Ticker", values=["Open", "High", "Low", "Close", "Adj. Close", "Volume"])
+
+        # Flatten column names
+        pivoted_df.columns = [f"{col[0]}_{col[1]}" for col in pivoted_df.columns]
+        pivoted_df.reset_index(inplace=True)
+
+        # Merge with original dataset to ensure each ticker retains its own target variable
+        merged_df = df_tickers.merge(pivoted_df, on="Date", how="left")
+
+        cols_to_drop = ["Open", "High", "Low", "Close", "Adj. Close", "Volume", "Dividend Paid"]
+        merged_df.drop(columns=cols_to_drop, inplace=True)
+
+        # Load the trained XGBoost model
+        model = joblib.load("resources/model/xgb.joblib")
+
+        # Store the 'Date' and 'Ticker' columns separately
+        date_ticker = merged_df[['Date', 'Ticker']]
+
+        # Drop the columns before prediction
+        X = merged_df.drop(columns=['Date', 'Ticker'])
+
+        dmat = xgb.DMatrix(X)
+
+        # Generate predictions
+        predictions = model.predict(dmat)
+
+        # Create a DataFrame with the original 'Date' and 'Ticker' and add predictions
+        df_predictions = date_ticker.copy()
+        df_predictions['Prediction'] = predictions
+        return df_predictions
 
 # Encodes an image to base64 format
 def get_base64(image_path):
@@ -154,7 +207,7 @@ def apply_custom_styles():
     )
 
 # Displays the homepage header with the logo and title
-def display_home_header(logo_path="resources/logo.png"):
+def display_home_header(logo_path="resources/images/logo.png"):
     logo_base64 = get_base64(logo_path)
     st.markdown(
         f"""
@@ -170,7 +223,7 @@ def display_home_header(logo_path="resources/logo.png"):
     )
 
 # Displays the logo in the top-left corner above the title
-def display_top_left_logo_above_title(logo_path="resources/logo.png"):
+def display_top_left_logo_above_title(logo_path="resources/images/logo.png"):
     logo_base64 = get_base64(logo_path)
     st.markdown(
         f"""
@@ -183,7 +236,7 @@ def display_top_left_logo_above_title(logo_path="resources/logo.png"):
     )
 
 # Displays a larger logo in the top-left corner
-def display_large_top_left_logo(logo_path="resources/logo.png"):
+def display_large_top_left_logo(logo_path="resources/images/logo.png"):
     logo_base64 = get_base64(logo_path)
     st.markdown(
         f"""
