@@ -92,7 +92,7 @@ class PySimFin:
         df = pd.DataFrame(rows, columns=columns)
         return df
     
-    def get_predictions(self):
+    def get_predictions_data(self):
         tickers = ["AAPL", "MSFT", "BRO", "FAST", "ODFL"]
         batch_size = 2
         all_data = []
@@ -123,15 +123,17 @@ class PySimFin:
 
         cols_to_drop = ["Open", "High", "Low", "Close", "Adj. Close", "Volume", "Dividend Paid"]
         merged_df.drop(columns=cols_to_drop, inplace=True)
+        return merged_df
 
+def predict_market(df):
         # Load the trained XGBoost model
         model = joblib.load("resources/model/xgb.joblib")
 
         # Store the 'Date' and 'Ticker' columns separately
-        date_ticker = merged_df[['Date', 'Ticker']]
+        date_ticker = df[['Date', 'Ticker']]
 
         # Drop the columns before prediction
-        X = merged_df.drop(columns=['Date', 'Ticker'])
+        X = df.drop(columns=['Date', 'Ticker'])
 
         dmat = xgb.DMatrix(X)
 
@@ -142,6 +144,25 @@ class PySimFin:
         df_predictions = date_ticker.copy()
         df_predictions['Prediction'] = predictions
         return df_predictions
+
+def is_market_open():
+    # Define NYSE timezone
+    nyse_tz = pytz.timezone('America/New_York')
+    
+    # Get current time in NYSE timezone
+    now = datetime.now(nyse_tz)
+    
+    # Market hours (9:30 AM - 4:00 PM EST)
+    market_open = now.replace(hour=9, minute=30, second=0, microsecond=0)
+    market_close = now.replace(hour=16, minute=0, second=0, microsecond=0)
+    
+    # Check if it's a weekday and within trading hours
+    if now.weekday() < 5 and market_open <= now <= market_close:
+        return True
+    return False
+
+# Check if NYSE is open
+print("NYSE is open:", is_market_open())
 
 # Encodes an image to base64 format
 def get_base64(image_path):

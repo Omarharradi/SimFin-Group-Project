@@ -23,7 +23,8 @@ simfin = utils.PySimFin(API_KEY)
 
 @st.cache_data
 def get_cached_predictions():
-    return simfin.get_predictions()
+    to_predict = simfin.get_predictions_data()
+    return utils.predict_market(to_predict)
 
 # Define allowed tickers
 tickers = ["AAPL", "MSFT", "BRO", "FAST", "ODFL"]
