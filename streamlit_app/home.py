@@ -1,22 +1,25 @@
-import sys
-import os
 import streamlit as st
 import utils  # Now import utils.py
 from PIL import Image, ImageOps, ImageDraw
 
 utils.set_custom_page_config(title="Home - ForesightX", icon="\U0001F3E0")
 
-def crop_to_circle(image_path, size=(150, 150)):
-    image = Image.open(image_path).convert("RGBA")
-    image = image.resize(size, Image.LANCZOS)
-    
-    mask = Image.new("L", size, 0)
+def crop_to_circle(image: Image.Image):
+    """Crops an image into a circular shape with smooth edges."""
+    size = min(image.size)  # Ensure the image is a square crop
+    mask = Image.new("L", (size, size), 0)  # Create a blank mask
     draw = ImageDraw.Draw(mask)
-    draw.ellipse((0, 0, size[0], size[1]), fill=255)
+    draw.ellipse((0, 0, size, size), fill=255)  # Smooth circle mask
+
+    # Crop image to square first to ensure correct dimensions
+    image = ImageOps.fit(image, (size, size), centering=(0.5, 0.5))
     
-    result = Image.new("RGBA", size, (255, 255, 255, 0))
-    result.paste(image, (0, 0), mask)
-    return result
+    # Apply mask with antialiasing
+    circular_image = Image.new("RGBA", (size, size))
+    circular_image.paste(image, (0, 0), mask)
+
+    return circular_image
+
 
 def main():
     utils.hide_streamlit_sidebar()
@@ -75,17 +78,17 @@ def main():
     ]
     
     # Load, crop to circle, and resize images
-    resized_images = [crop_to_circle(img, size=(150, 150)) for img in team_images]
+    resized_images = [crop_to_circle(Image.open(img)) for img in team_images]
     
     # Adjust layout to properly center the second-row images
     col1, col2, col3 = st.columns([1, 1, 1])
-    with col1: st.image(resized_images[0], use_container_width=False)
-    with col2: st.image(resized_images[1], use_container_width=False)
-    with col3: st.image(resized_images[2], use_container_width=False)
+    with col1: st.image(resized_images[0], use_container_width=False, width=380)
+    with col2: st.image(resized_images[1], use_container_width=False, width=380)
+    with col3: st.image(resized_images[2], use_container_width=False, width=380)
     
     col_space1, col4, col_space2, col5, col_space3 = st.columns([0.5, 1, 0.5, 1, 0.5])
-    with col4: st.image(resized_images[3], use_container_width=False)
-    with col5: st.image(resized_images[4], use_container_width=False)
+    with col4: st.image(resized_images[3], use_container_width=False, width=380)
+    with col5: st.image(resized_images[4], use_container_width=False, width=380)
     
     # Footer
     st.markdown("---")
