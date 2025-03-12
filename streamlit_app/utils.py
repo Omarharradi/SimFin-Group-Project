@@ -164,6 +164,7 @@ def is_market_open():
 # Check if NYSE is open
 print("NYSE is open:", is_market_open())
 
+
 # Encodes an image to base64 format
 def get_base64(image_path):
     with open(image_path, "rb") as file:
@@ -189,13 +190,74 @@ def hide_streamlit_sidebar():
         unsafe_allow_html=True
     )
 
-# Adds a navigation sidebar for easy access to pages
 def navigation_bar():
-    with st.sidebar:
-        st.title("📌 Main Menu")
-        st.page_link("home.py", label="🏠 Home")
-        st.page_link("pages/go_live_v4_5.py", label="📊 Prediction")
-        st.page_link("pages/company_info_v1.py", label="🏢 Ticker Overview")
+    logo_base64 = get_base64("resources/images/logo.png")  # Ensure correct logo path
+
+    st.markdown(
+        f"""
+        <style>
+            .top-nav {{
+                display: flex;
+                align-items: center;
+                justify-content: start; /* Align logo and menu to the left */
+                background-color: #002149;
+                padding: 25px 40px; /* Increase top and bottom padding */
+                border-radius: 8px;
+            }}
+            .top-nav img {{
+                width: 300px;  /* Make logo bigger */
+                height: auto;
+                margin-right: 40px; /* Increase space between logo and menu */
+            }}
+            .menu-container {{
+                display: flex;
+                align-items: center;
+                gap: 100px; /* Increase space between menu items */
+            }}
+            .menu-container button {{
+                background: none !important;
+                border: none !important;
+                color: white !important;
+                font-size: 50px !important; /* Increase font size of menu */
+                font-weight: bold !important;
+                padding: 10px 20px !important; /* Increase button padding */
+                cursor: pointer;
+            }}
+            .menu-container button:hover {{
+                text-decoration: underline !important;
+            }}
+        </style>
+        <div class="top-nav">
+            <img src="data:image/png;base64,{logo_base64}" alt="Company Logo">
+            <div class="menu-container">
+                <div id="home"></div>
+                <div id="company"></div>
+                <div id="prediction"></div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Injecting `st.page_link()` buttons inline using st.empty()
+    menu_placeholder = st.empty()
+    with menu_placeholder.container():
+        inline_col = st.columns([1, 1, 1])  # Keep buttons close together
+        with inline_col[0]:
+            st.page_link("home.py", label="Home", use_container_width=False)
+        with inline_col[1]:
+            st.page_link("pages/company_info_v1.py", label="Company Overview", use_container_width=False)
+        with inline_col[2]:
+            st.page_link("pages/go_live_v5.py", label="Prediction", use_container_width=False)
+
+
+# Adds a navigation sidebar for easy access to pages
+#def navigation_bar():
+    #with st.sidebar:
+        #st.title("📌 Main Menu")
+        #st.page_link("home.py", label="🏠 Home")
+        #st.page_link("pages/go_live_v4_5.py", label="📊 Prediction")
+        #st.page_link("pages/company_info_v1.py", label="🏢 Ticker Overview")
 
 # Applies global styling for the app
 def apply_custom_styles():
@@ -203,7 +265,16 @@ def apply_custom_styles():
         """
         <style>
             .stApp {
-                background-color: #002149;
+                background-color: #002149; /* Keep Dark Background */
+            }
+            h1, h2, h3 {
+                color: #4DCF9E !important; /* Apply New Title Color */
+            }
+            .stMarkdown {
+                color: white !important; /* Keep all regular text white */
+            }
+            hr {
+                border: 1px solid #4DCF9E !important; /* Apply same color to dividers */
             }
             .stButton>button {
                 background-color: #2C9795 !important;
@@ -212,10 +283,7 @@ def apply_custom_styles():
                 border-radius: 5px;
             }
             .stButton>button:hover {
-                background-color: #2C9795 !important;
-            }
-            h1, h2, h3 {
-                color: #2C9795;
+                background-color: #237878 !important;
             }
             .stTextInput>div>div>input {
                 background-color: #004080;
@@ -228,17 +296,23 @@ def apply_custom_styles():
     )
 
 # Displays the homepage header with the logo and title
-def display_home_header(logo_path="resources/images/logo.png"):
-    logo_base64 = get_base64(logo_path)
+def display_home_header():
     st.markdown(
         f"""
-        <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
-            <img src="data:image/png;base64,{logo_base64}" width="300">
-            <h1 style="font-size: 60px; font-weight: bold; color: #F2F3F4;">Welcome to ForesightX</h1>
+        <style>
+            .page-title {{
+                margin-top: -20px !important;  /* Pull title closer */
+                text-align: center;
+            }}
+        </style>
+        <div class="page-title">
+            <h1 style="font-size: 60px; font-weight: bold; color: #4DCF9E;">Welcome to ForesightX</h1>
         </div>
-        <hr style="border: 1px solid #2C9795;">
-        <div style="text-align: center; font-size: 35px; font-weight: bold; color: white;">Your AI-Powered Stock Prediction Assistant!</div>
-        <hr style="border: 1px solid #2C9795;">
+        <hr style="border: 1px solid #4DCF9E;">
+        <div style="text-align: center; font-size: 35px; font-weight: bold; color: white;">
+            Your AI-Powered Stock Prediction Assistant!
+        </div>
+        <hr style="border: 1px solid #4DCF9E;">
         """,
         unsafe_allow_html=True
     )
@@ -268,7 +342,6 @@ def display_large_top_left_logo(logo_path="resources/images/logo.png"):
         """,
         unsafe_allow_html=True
     )
-
 # time retries and delays SinFim API
 def get_company_info(self, tickers: list, max_retries=3, delay=5):
     base_url = "https://backend.simfin.com/api/v3/companies/general/compact" 

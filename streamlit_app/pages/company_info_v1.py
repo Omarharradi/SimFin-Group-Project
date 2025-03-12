@@ -11,9 +11,6 @@ utils.hide_streamlit_sidebar()
 utils.navigation_bar()
 utils.apply_custom_styles()
 
-# Display large logo in the top-left corner
-utils.display_large_top_left_logo()
-
 st.title("🏢 Company Information")
 st.markdown(f"<p style='color:white; font-size:24px;'>Get insights on companies by selecting a stock ticker below.</p>", unsafe_allow_html=True)
 
