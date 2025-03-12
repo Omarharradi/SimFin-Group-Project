@@ -70,14 +70,66 @@ if ticker and days:
         market_movement = "go up 📈" if predicted_value >= 0.5 else "go down 📉"
 
         # Display the neutral banner above the figure
+        #st.markdown(
+        #    f"""
+        #    <div style="background-color:#f0f0f0; padding:10px; border-radius:5px; text-align:center; font-size:16px; color:black;">
+        #        <b>The ticker {ticker} for today's market movement is expected to {market_movement} based on yesterday's stock movement!</b>
+        #    </div>
+        #    """,
+        #    unsafe_allow_html=True
+        #)
+
         st.markdown(
             f"""
-            <div style="background-color:#f0f0f0; padding:10px; border-radius:5px; text-align:center; font-size:16px; color:black;">
-                <b>The ticker {ticker} for today's market movement is expected to {market_movement} based on yesterday's stock movement!</b>
+            <style>
+                .banner-container {{
+                    position: relative;
+                    display: inline-block;
+                    width: 100%;
+                }}
+                .banner {{
+                    background-color:#f0f0f0;
+                    padding:10px;
+                    border-radius:5px;
+                    text-align:center;
+                    font-size:16px;
+                    color:black;
+                    cursor: help;  /* Changes cursor to indicate it's interactive */
+                }}
+                .tooltip-text {{
+                    visibility: hidden;
+                    width: 280px;
+                    background-color: black;
+                    color: white;
+                    text-align: center;
+                    border-radius: 5px;
+                    padding: 5px;
+                    position: absolute;
+                    z-index: 1;
+                    top: -40px; /* Adjusts position above the banner */
+                    left: 50%;
+                    transform: translateX(-50%);
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                    font-size: 14px;
+                }}
+                .banner-container:hover .tooltip-text {{
+                    visibility: visible;
+                    opacity: 1;
+                }}
+            </style>
+
+            <div class="banner-container">
+                <div class="banner">
+                    <b>The ticker {ticker} for today's market movement is expected to {market_movement} based on yesterday's stock movement!</b>
+                </div>
+                <div class="tooltip-text">The {ticker} ticker has a model prediction value of {predicted_value:.4f}</div>
             </div>
             """,
             unsafe_allow_html=True
         )
+        st.write("Note: You can hover over the banner to know the model's predicted value")
+
         # Fetch stock data based on user selection
         stock_data = simfin.get_stock_prices([ticker], days=days)
         stock_data = stock_data.rename(columns={
