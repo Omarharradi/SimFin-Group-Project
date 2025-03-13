@@ -23,7 +23,7 @@ tickers = ["AAPL", "MSFT", "BRO", "FAST", "ODFL"]
 
 # Dropdown for ticker selection with a default value
 st.markdown(
-    "<p style='font-size:22px; color:#DDE2E5 !important;'>Select a Stock Ticker:</p>", 
+    "<p style='font-size:22px; color:#DDE2E5 !important; margin-bottom: -20px;'>Select a Stock Ticker:</p>", 
     unsafe_allow_html=True
 )
 ticker = st.selectbox("", tickers, index=0, key="selected_ticker")
