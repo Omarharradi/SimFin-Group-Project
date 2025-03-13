@@ -15,7 +15,7 @@ import time
 #utils.navigation_bar()
 
 # Utils 
-utils.set_custom_page_config(title="Go Live", icon="🏢")
+utils.set_custom_page_config(title="Prediction - ForesightX", icon="📊")
 utils.hide_streamlit_sidebar()
 utils.navigation_bar()
 utils.apply_custom_styles()

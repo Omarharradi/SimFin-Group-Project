@@ -6,7 +6,7 @@ from PIL import Image
 from io import BytesIO
 
 # Streamlit UI Config
-utils.set_custom_page_config(title="Company Information", icon="🏢")
+utils.set_custom_page_config(title="Company Overview - ForesightX", icon="🏢")
 utils.hide_streamlit_sidebar()
 utils.navigation_bar()
 utils.apply_custom_styles()
