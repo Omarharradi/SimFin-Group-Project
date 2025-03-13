@@ -4,6 +4,7 @@ import utils
 import streamlit.components.v1 as components
 import time
 
+utils.set_custom_page_config(title="📈 Backtest", icon="")
 utils.display_backtesting_header()
 utils.hide_streamlit_sidebar()
 utils.navigation_bar()
