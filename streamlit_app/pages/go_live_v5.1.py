@@ -5,14 +5,21 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from datetime import datetime, timedelta
 import utils
+from utils import custom_label
 import time
 
 # Streamlit UI Config
-st.set_page_config(page_title="Go Live", page_icon="📊", layout="wide")
-st.title("📊 Go Live - Stock Analysis")
-
+#st.set_page_config(page_title="Go Live", page_icon="📊", layout="wide")
+#st.title("📊 Go Live - Stock Analysis")
 # Add navigation
+#utils.navigation_bar()
+
+# Utils 
+utils.set_custom_page_config(title="Go Live", icon="🏢")
+utils.hide_streamlit_sidebar()
 utils.navigation_bar()
+utils.apply_custom_styles()
+utils.display_predictor_header()
 
 # Initialize API
 API_KEY = "0ce27565-392d-4c49-a438-71e3b39f298f"
@@ -26,10 +33,13 @@ def get_cached_predictions():
 # Define allowed tickers
 tickers = ["AAPL", "MSFT", "BRO", "FAST", "ODFL"]
 
-# Dropdown for ticker selection
-ticker = st.selectbox("Select a Stock Ticker:", tickers, key="selected_ticker")
+# Display custom-styled label for the stock ticker dropdown
+custom_label("Select a Stock Ticker:")
 
-# Dropdown for time period selection
+# Ticker Selectbox with no label (since we already added a custom label above)
+ticker = st.selectbox("", tickers, key="selected_ticker")
+
+# Dictionary for time periods
 time_periods = {
     "Last Week": 7,
     "Last Month": 30,
@@ -38,7 +48,12 @@ time_periods = {
     "Last Year": 365,
     "Custom": None  # Placeholder for user input
 }
-selected_period = st.selectbox("Select Time Period:", list(time_periods.keys()), key="selected_period")
+
+# Display custom-styled label for the time period dropdown
+custom_label("Select Time Period:")
+
+# Time Period Selectbox with no label
+selected_period = st.selectbox("", list(time_periods.keys()), key="selected_period")
 
 # Custom time period input (if user selects "Custom")
 if selected_period == "Custom":
@@ -120,7 +135,8 @@ if ticker and days:
         if stock_data.empty:
             st.warning("No data found for this stock.")
         else:
-            st.subheader("📊 Candlestick Chart with Volume")
+            st.markdown("<br><br>", unsafe_allow_html=True) 
+            st.markdown("<h2 style='text-align: center;'>📊 Candlestick Chart with Volume</h2>", unsafe_allow_html=True)
             chart_placeholder = st.empty()
             
             def plot_candlestick_chart(df):

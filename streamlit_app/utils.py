@@ -179,6 +179,15 @@ def set_custom_page_config(title="ForesightX", icon="📌"):
         initial_sidebar_state="collapsed"
     )
 
+# Sets the page configuration for all pages
+def set_custom_page_config(title="ForesightX", icon="📌"):
+    st.set_page_config(
+        page_title=title,  # Title shown in browser tab
+        page_icon=icon,  # Emoji/icon for the page
+        layout="wide",  # Full-width layout
+        initial_sidebar_state="expanded"  # Hide default Streamlit sidebar
+    )
+
 # Hides the default Streamlit sidebar
 def hide_streamlit_sidebar():
     st.markdown(
@@ -190,74 +199,14 @@ def hide_streamlit_sidebar():
         unsafe_allow_html=True
     )
 
-def navigation_bar():
-    logo_base64 = get_base64("resources/images/logo.png")  # Ensure correct logo path
-
-    st.markdown(
-        f"""
-        <style>
-            .top-nav {{
-                display: flex;
-                align-items: center;
-                justify-content: start; /* Align logo and menu to the left */
-                background-color: #002149;
-                padding: 25px 40px; /* Increase top and bottom padding */
-                border-radius: 8px;
-            }}
-            .top-nav img {{
-                width: 300px;  /* Make logo bigger */
-                height: auto;
-                margin-right: 40px; /* Increase space between logo and menu */
-            }}
-            .menu-container {{
-                display: flex;
-                align-items: center;
-                gap: 100px; /* Increase space between menu items */
-            }}
-            .menu-container button {{
-                background: none !important;
-                border: none !important;
-                color: white !important;
-                font-size: 50px !important; /* Increase font size of menu */
-                font-weight: bold !important;
-                padding: 10px 20px !important; /* Increase button padding */
-                cursor: pointer;
-            }}
-            .menu-container button:hover {{
-                text-decoration: underline !important;
-            }}
-        </style>
-        <div class="top-nav">
-            <img src="data:image/png;base64,{logo_base64}" alt="Company Logo">
-            <div class="menu-container">
-                <div id="home"></div>
-                <div id="company"></div>
-                <div id="prediction"></div>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    # Injecting `st.page_link()` buttons inline using st.empty()
-    menu_placeholder = st.empty()
-    with menu_placeholder.container():
-        inline_col = st.columns([1, 1, 1])  # Keep buttons close together
-        with inline_col[0]:
-            st.page_link("home.py", label="Home", use_container_width=False)
-        with inline_col[1]:
-            st.page_link("pages/company_info_v1.py", label="Company Overview", use_container_width=False)
-        with inline_col[2]:
-            st.page_link("pages/go_live_v5.py", label="Prediction", use_container_width=False)
-
-
 # Adds a navigation sidebar for easy access to pages
-#def navigation_bar():
-    #with st.sidebar:
-        #st.title("📌 Main Menu")
-        #st.page_link("home.py", label="🏠 Home")
-        #st.page_link("pages/go_live_v4_5.py", label="📊 Prediction")
-        #st.page_link("pages/company_info_v1.py", label="🏢 Ticker Overview")
+def navigation_bar():
+    with st.sidebar:
+        st.title("📌 Main Menu")
+        st.page_link("home.py", label="🏠 Home")
+        st.page_link("pages/company_info_v1.py", label="🏢 Company Overview")
+        st.page_link("pages/go_live_v5.1.py", label="📊 Prediction")
+        
 
 # Applies global styling for the app
 def apply_custom_styles():
@@ -265,25 +214,19 @@ def apply_custom_styles():
         """
         <style>
             .stApp {
-                background-color: #002149; /* Keep Dark Background */
-            }
-            h1, h2, h3 {
-                color: #4DCF9E !important; /* Apply New Title Color */
-            }
-            .stMarkdown {
-                color: white !important; /* Keep all regular text white */
-            }
-            hr {
-                border: 1px solid #4DCF9E !important; /* Apply same color to dividers */
+                background-color: #002149;
             }
             .stButton>button {
-                background-color: #2C9795 !important;
+                background-color: #05CC77 !important;
                 color: white !important;
                 font-weight: bold;
                 border-radius: 5px;
             }
             .stButton>button:hover {
-                background-color: #237878 !important;
+                background-color: #04A76F !important;
+            }
+            h1, h2, h3 {
+                color: #34ABA2 !important;  /* Changed to teal */
             }
             .stTextInput>div>div>input {
                 background-color: #004080;
@@ -295,37 +238,47 @@ def apply_custom_styles():
         unsafe_allow_html=True
     )
 
+
 # Displays the homepage header with the logo and title
-def display_home_header():
+def display_home_header(logo_path="resources/images/logo.png"):
+    logo_base64 = get_base64(logo_path)
     st.markdown(
         f"""
-        <style>
-            .page-title {{
-                margin-top: -20px !important;  /* Pull title closer */
-                text-align: center;
-            }}
-        </style>
-        <div class="page-title">
-            <h1 style="font-size: 60px; font-weight: bold; color: #4DCF9E;">Welcome to ForesightX</h1>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+            <img src="data:image/png;base64,{logo_base64}" width="300">
+            <h1 style="font-size: 60px; font-weight: bold; color: #F2F3F4;">Welcome to ForesightX</h1>
         </div>
-        <hr style="border: 1px solid #4DCF9E;">
-        <div style="text-align: center; font-size: 35px; font-weight: bold; color: white;">
-            Your AI-Powered Stock Prediction Assistant!
-        </div>
-        <hr style="border: 1px solid #4DCF9E;">
+        <hr style="border: 1px solid #F2F3F4;">
+        <div style="text-align: center; font-size: 35px; font-weight: bold; color:white;">Your AI-Powered Stock Prediction Assistant!</div>
+        <hr style="border: 1px solid #F2F3F4;">
         """,
         unsafe_allow_html=True
     )
 
-# Displays the logo in the top-left corner above the title
-def display_top_left_logo_above_title(logo_path="resources/images/logo.png"):
+# Displays company header
+def display_company_header(logo_path="resources/images/logo.png"):
     logo_base64 = get_base64(logo_path)
     st.markdown(
         f"""
-        <div style="position: absolute; top: 10px; left: 10px;">
-            <img src="data:image/png;base64,{logo_base64}" width="200">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+            <img src="data:image/png;base64,{logo_base64}" width="300">
+            <h1 style="font-size: 60px; font-weight: bold; color: #F2F3F4;">Company Overview</h1>
         </div>
-        <br><br><br><br>  <!-- Adds spacing to prevent overlap with the title -->
+        <hr style="border: 1px solid #F2F3F4;">
+        """,
+        unsafe_allow_html=True
+    )
+
+# Displays predictor header
+def display_predictor_header(logo_path="resources/images/logo.png"):
+    logo_base64 = get_base64(logo_path)
+    st.markdown(
+        f"""
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+            <img src="data:image/png;base64,{logo_base64}" width="300">
+            <h1 style="font-size: 60px; font-weight: bold; color: #F2F3F4;">Go Live - Stock Analysis</h1>
+        </div>
+        <hr style="border: 1px solid #F2F3F4;">
         """,
         unsafe_allow_html=True
     )
@@ -342,6 +295,22 @@ def display_large_top_left_logo(logo_path="resources/images/logo.png"):
         """,
         unsafe_allow_html=True
     )
+
+# Custom label go live
+def custom_label(text, font_size=22, color="#DDE2E5"):
+    """
+    Displays a custom-styled label using st.markdown.
+
+    Parameters:
+        text (str): The label text to display.
+        font_size (int): The font size of the label (default is 22px).
+        color (str): The hex color of the label text (default is #DDE2E5).
+    """
+    st.markdown(
+        f"<p style='font-size:{font_size}px; color:{color} !important; margin-bottom: -30px;'>{text}</p>", 
+        unsafe_allow_html=True
+    )
+
 # time retries and delays SinFim API
 def get_company_info(self, tickers: list, max_retries=3, delay=5):
     base_url = "https://backend.simfin.com/api/v3/companies/general/compact" 

@@ -26,8 +26,10 @@ def main():
     utils.navigation_bar()
     utils.apply_custom_styles()
     utils.display_home_header()
+    utils.hide_streamlit_sidebar()
     
     # Quick Overview of the App with larger text for readability
+    st.markdown("<br>", unsafe_allow_html=True) 
     st.markdown("# Overview of the App", unsafe_allow_html=True)
     st.markdown(
         """
@@ -41,20 +43,23 @@ def main():
     )
     
     # Easy Steps to Get Started
+    st.markdown("<br>", unsafe_allow_html=True) 
     st.markdown("# Easy Steps to Get Started", unsafe_allow_html=True)
     st.markdown(
         """
         <p style='font-size:22px;'>
-        ✅ Step 1: Go to the 'Predictor' page and select the ticker (AAPL, MSFT, BRO, FAST, and ODFL).<br>
-        ✅ Step 2: View real-time stock data & our AI-powered prediction.<br>
-        ✅ Step 3: Check trading recommendations for next day.<br>
-        ✅ Step 4: Review the past performance.
+        ✅ Step 1: Review company's information<br>
+        ✅ Step 2: Go to the 'Predictor' page and select the ticker (AAPL, MSFT, BRO, FAST, and ODFL).<br>
+        ✅ Step 3: View real-time stock data & our AI-powered prediction.<br>
+        ✅ Step 4: Check trading recommendations for next day.<br>
+        ✅ Step 5: Review the past performance.
         </p>
         """,
         unsafe_allow_html=True,
     )
     
     # Team Information
+    st.markdown("<br>", unsafe_allow_html=True) 
     st.markdown("# Development Team", unsafe_allow_html=True)
     st.markdown(
         """
@@ -66,9 +71,12 @@ def main():
         """,
         unsafe_allow_html=True,
     )
+
+    st.markdown("<br>", unsafe_allow_html=True) 
     
     # Display team members' images
-    st.markdown("## Meet the Dev Team")
+    st.markdown("## Meet the ForesightX Team")
+    st.markdown("<br><br>", unsafe_allow_html=True) 
     team_images = [
         "resources/images/team_member_1.jpg",
         "resources/images/team_member_2.jpg",
@@ -93,9 +101,9 @@ def main():
     # Footer
     st.markdown("---")
     st.markdown(
-        "<p style='font-size:18px;'> 📧 Have feedback? Reach out to us!.</p>",
-        unsafe_allow_html=True,
-    )
+        "<p style='font-size:22px;'> 📧 Have feedback? Reach out to us!</p>",
+    unsafe_allow_html=True,
+)
 
 if __name__ == "__main__":
     main()

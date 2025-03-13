@@ -8,11 +8,15 @@ import utils
 import time
 
 # Streamlit UI Config
-st.set_page_config(page_title="Go Live", page_icon="📊", layout="wide")
-st.title("📊 Go Live - Stock Analysis")
+#st.set_page_config(page_title="Go Live", page_icon="📊", layout="wide")
+#st.title("📊 Go Live - Stock Analysis")
 
 # Add navigation
+utils.set_custom_page_config(title="Go Live", icon="🏢")
+utils.hide_streamlit_sidebar()
 utils.navigation_bar()
+utils.apply_custom_styles()
+utils.display_predictor_header()
 
 # Hide Streamlit's default sidebar
 #utils.hide_streamlit_sidebar()
