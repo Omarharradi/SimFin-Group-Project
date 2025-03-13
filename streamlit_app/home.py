@@ -49,10 +49,11 @@ def main():
         """
         <p style='font-size:22px;'>
         ✅ Step 1: Review company's information<br>
-        ✅ Step 2: Go to the 'Predictor' page and select the ticker (AAPL, MSFT, BRO, FAST, and ODFL).<br>
-        ✅ Step 3: View real-time stock data & our AI-powered prediction.<br>
-        ✅ Step 4: Check trading recommendations for next day.<br>
-        ✅ Step 5: Review the past performance.
+        ✅ Step 2: Go to the 'Predictor' page and select the ticker (AAPL, MSFT, BRO, FAST, and ODFL)<br>
+        ✅ Step 3: View real-time stock data & our AI-powered prediction<br>
+        ✅ Step 4: Check trading recommendations for next day<br>
+        ✅ Step 5: Review the past performance
+        ✅ Step 6: Estimating Performance with Our Backtesting Tool
         </p>
         """,
         unsafe_allow_html=True,
@@ -64,9 +65,9 @@ def main():
     st.markdown(
         """
         <p style='font-size:22px;'>
-        🔍 This project is developed by our group as part of a school assignment.<br>
-        👨‍💻 ML Team: Responsible for building the predictive model.<br>
-        🛠️ DEV Team: Responsible for building the Streamlit application and integrating the ML model.
+        🔍 This project is developed by our group as part of a school assignment<br>
+        👨‍💻 ML Team: Responsible for building the predictive model<br>
+        🛠️ DEV Team: Responsible for building the Streamlit application and integrating the ML model
         </p>
         """,
         unsafe_allow_html=True,

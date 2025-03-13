@@ -265,7 +265,7 @@ def navigation_bar():
         st.page_link("home.py", label="🏠 Home")
         st.page_link("pages/company_info_v1.py", label="🏢 Company Overview")
         st.page_link("pages/go_live_v5.1.py", label="📊 Prediction")
-        st.page_link("pages/backtest.py", label = "📊 Backtest!")
+        st.page_link("pages/backtest.py", label = "📈 Backtest")
         
 
 # Applies global styling for the app
@@ -304,7 +304,7 @@ def display_home_header(logo_path="resources/images/logo.png"):
     logo_base64 = get_base64(logo_path)
     st.markdown(
         f"""
-        <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 0px;">
             <img src="data:image/png;base64,{logo_base64}" width="300">
             <h1 style="font-size: 60px; font-weight: bold; color: #F2F3F4;">Welcome to ForesightX</h1>
         </div>
@@ -325,6 +325,29 @@ def display_company_header(logo_path="resources/images/logo.png"):
             <h1 style="font-size: 60px; font-weight: bold; color: #F2F3F4;">Company Overview</h1>
         </div>
         <hr style="border: 1px solid #F2F3F4;">
+        """,
+        unsafe_allow_html=True
+    )
+
+# Displays Backtesting Tool header
+def get_base64(image_path):
+    """Encodes an image to Base64 format."""
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
+
+def display_backtesting_header(logo_path="resources/images/logo.png"):
+    """
+    Displays the Backtesting Tool header with reduced spacing.
+    """
+    logo_base64 = get_base64(logo_path)
+
+    st.markdown(
+        f"""
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+            <img src="data:image/png;base64,{logo_base64}" width="300">
+            <h1 style="font-size: 60px; font-weight: bold; color: #F2F3F4; margin-bottom: 10px;">Backtesting Tool</h1>
+        </div>
+        <hr style="border: 1px solid #F2F3F4; margin-top: 5px; margin-bottom: 5px;">
         """,
         unsafe_allow_html=True
     )
