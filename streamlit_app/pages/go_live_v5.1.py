@@ -199,8 +199,12 @@ if ticker and days:
                             today_data
                         ], ignore_index=True).drop_duplicates(subset=["date"], keep="last")
                 
-                chart_placeholder.plotly_chart(plot_candlestick_chart(st.session_state.latest_data), use_container_width=True)
-                time.sleep(10)  # Check every 10 seconds
+                chart_placeholder.plotly_chart(
+                        plot_candlestick_chart(st.session_state.latest_data),
+                        use_container_width=True,
+                        key=f"candlestick_chart_{datetime.now().strftime('%Y%m%d%H%M%S')}"
+                    )
+                time.sleep(20)  # Check every 10 seconds
 
     except Exception as e:
         st.error(f"❌ Error fetching stock data: {e}")
