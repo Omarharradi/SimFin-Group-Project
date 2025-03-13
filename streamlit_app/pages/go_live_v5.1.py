@@ -207,4 +207,4 @@ if ticker and days:
                 time.sleep(20)  # Check every 10 seconds
 
     except Exception as e:
-        st.error(f"❌ Error fetching stock data: {e}")
+        st.error(f"❌ Error fetching stock data, the free version of the SimFin API has a limit of 2 requests per second. Refresh the page or select again!")
