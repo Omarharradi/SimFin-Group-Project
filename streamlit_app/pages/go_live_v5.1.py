@@ -8,12 +8,6 @@ import utils
 from utils import custom_label
 import time
 
-# Streamlit UI Config
-#st.set_page_config(page_title="Go Live", page_icon="📊", layout="wide")
-#st.title("📊 Go Live - Stock Analysis")
-# Add navigation
-#utils.navigation_bar()
-
 # Utils 
 utils.set_custom_page_config(title="Prediction - ForesightX", icon="📊")
 utils.hide_streamlit_sidebar()
@@ -65,62 +59,75 @@ else:
 # Fetch stock data based on user selection
 if ticker and days:
     try:
-        # Get predictions from cache
-        predictions_df = get_cached_predictions()
-        predicted_value = predictions_df.loc[predictions_df["Ticker"] == ticker, "Prediction"].values[0]
-        market_movement = "go up 📈" if predicted_value >= 0.5 else "go down 📉"
-        
-        st.markdown(
-            f"""
-            <style>
-                .banner-container {{
-                    position: relative;
-                    display: inline-block;
-                    width: 100%;
-                }}
-                .banner {{
-                    background-color:#f0f0f0;
-                    padding:10px;
-                    border-radius:5px;
-                    text-align:center;
-                    font-size:16px;
-                    color:black;
-                    cursor: help;  /* Changes cursor to indicate it's interactive */
-                }}
-                .tooltip-text {{
-                    visibility: hidden;
-                    width: 280px;
-                    background-color: black;
-                    color: white;
-                    text-align: center;
-                    border-radius: 5px;
-                    padding: 5px;
-                    position: absolute;
-                    z-index: 1;
-                    top: -40px; /* Adjusts position above the banner */
-                    left: 50%;
-                    transform: translateX(-50%);
-                    opacity: 0;
-                    transition: opacity 0.3s;
-                    font-size: 14px;
-                }}
-                .banner-container:hover .tooltip-text {{
-                    visibility: visible;
-                    opacity: 1;
-                }}
-            </style>
+        if utils.is_trading_day():
+            # Get predictions from cache
+            predictions_df = get_cached_predictions()
+            predicted_value = predictions_df.loc[predictions_df["Ticker"] == ticker, "Prediction"].values[0]
+            market_movement = "go up 📈" if predicted_value >= 0.5 else "go down 📉"
 
-            <div class="banner-container">
-                <div class="banner">
-                    <b>The ticker {ticker} for today's market movement is expected to {market_movement} based on yesterday's stock movement!</b>
+            st.markdown(
+                f"""
+                <style>
+                    .banner-container {{
+                        position: relative;
+                        display: inline-block;
+                        width: 100%;
+                    }}
+                    .banner {{
+                        background-color:#f0f0f0;
+                        padding:10px;
+                        border-radius:5px;
+                        text-align:center;
+                        font-size:16px;
+                        color:black;
+                        cursor: help;
+                    }}
+                    .tooltip-text {{
+                        visibility: hidden;
+                        width: 280px;
+                        background-color: black;
+                        color: white;
+                        text-align: center;
+                        border-radius: 5px;
+                        padding: 5px;
+                        position: absolute;
+                        z-index: 1;
+                        top: -40px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        opacity: 0;
+                        transition: opacity 0.3s;
+                        font-size: 14px;
+                    }}
+                    .banner-container:hover .tooltip-text {{
+                        visibility: visible;
+                        opacity: 1;
+                    }}
+                </style>
+
+                <div class="banner-container">
+                    <div class="banner">
+                        <b>The ticker {ticker} for today's market movement is expected to {market_movement} based on yesterday's stock movement!</b>
+                    </div>
+                    <div class="tooltip-text">The {ticker} ticker has a model prediction value of {predicted_value:.4f}</div>
                 </div>
-                <div class="tooltip-text">The {ticker} ticker has a model prediction value of {predicted_value:.4f}</div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        st.write("Note: You can hover over the banner to know the model's predicted value")
+                """,
+                unsafe_allow_html=True
+            )
 
+            st.write("Note: You can hover over the banner to know the model's predicted value")
+
+        else:
+            st.markdown(
+                f"""
+                <div style="background-color:#f0f0f0; padding:10px; border-radius:5px; text-align:center; font-size:16px; color:black;">
+                    📢 <b>The market is closed today! There are no predictions for today.</b><br>
+                    🕒 US Market operates from 9:30 AM to 4:00 PM ET, Monday to Friday.<br>
+                    You can still see the past days movement and try out our backtesting feature!
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
 
         stock_data = simfin.get_stock_prices([ticker], days=days)
         stock_data = stock_data.rename(columns={

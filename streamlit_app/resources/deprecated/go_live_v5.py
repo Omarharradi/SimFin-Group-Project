@@ -74,16 +74,6 @@ if ticker and days:
         # Determine the market movement
         market_movement = "go up 📈" if predicted_value >= 0.5 else "go down 📉"
 
-        # Display the neutral banner above the figure
-        #st.markdown(
-        #    f"""
-        #    <div style="background-color:#f0f0f0; padding:10px; border-radius:5px; text-align:center; font-size:16px; color:black;">
-        #        <b>The ticker {ticker} for today's market movement is expected to {market_movement} based on yesterday's stock movement!</b>
-        #    </div>
-        #    """,
-        #    unsafe_allow_html=True
-        #)
-
         st.markdown(
             f"""
             <style>

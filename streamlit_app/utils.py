@@ -224,6 +224,11 @@ def is_market_open():
         return True
     return False
 
+def is_trading_day():
+    nyse_tz = pytz.timezone("America/New_York")
+    today = datetime.now(nyse_tz).date()
+    return today.weekday() < 5  # Monday to Friday are trading days
+
 # Encodes an image to base64 format
 def get_base64(image_path):
     with open(image_path, "rb") as file:
@@ -393,33 +398,6 @@ def custom_label(text, font_size=22, color="#DDE2E5"):
         f"<p style='font-size:{font_size}px; color:{color} !important; margin-bottom: -30px;'>{text}</p>", 
         unsafe_allow_html=True
     )
-
-## time retries and delays SinFim API
-#def get_company_info(self, tickers: list, max_retries=3, delay=5):
-#    base_url = "https://backend.simfin.com/api/v3/companies/general/compact" 
-#    ticker_list = ",".join(tickers)
-#    url = f"{base_url}?ticker={ticker_list}"  
-#    
-#    for attempt in range(max_retries):
-#        response = requests.get(url, headers=self.headers)
-#        
-#        if response.status_code == 200:
-#            data = response.json()
-#            if "columns" in data and "data" in data:
-#                return pd.DataFrame(data["data"], columns=data["columns"])
-#            else:
-#                raise Exception(f"Unexpected API response format: {data}")
-#
-#        elif response.status_code == 429:
-#            # Too many requests - wait and retry
-#            wait_time = (attempt + 1) * delay
-#            print(f"Rate limit exceeded. Retrying in {wait_time} seconds...")
-#            time.sleep(wait_time)
-#        else:
-#            raise Exception(f"API Error {response.status_code}: {response.text}")
-#
-#    raise Exception("Max retries reached. API request failed.")
-
 
 class SignalStrategy(Strategy):
     """

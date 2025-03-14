@@ -1,5 +1,5 @@
 import streamlit as st
-import utils  # Now import utils.py
+import utils 
 from PIL import Image, ImageOps, ImageDraw
 
 utils.set_custom_page_config(title="Home - ForesightX", icon="\U0001F3E0")
@@ -52,7 +52,7 @@ def main():
         ✅ Step 2: Go to the 'Predictor' page and select the ticker (AAPL, MSFT, BRO, FAST, and ODFL)<br>
         ✅ Step 3: View real-time stock data & our AI-powered prediction<br>
         ✅ Step 4: Check trading recommendations for next day<br>
-        ✅ Step 5: Review the past performance
+        ✅ Step 5: Review the past performance<br>
         ✅ Step 6: Estimating Performance with Our Backtesting Tool
         </p>
         """,
