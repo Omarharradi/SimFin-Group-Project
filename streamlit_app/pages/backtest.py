@@ -14,9 +14,6 @@ utils.hide_streamlit_sidebar()
 # Hardcoded list of tickers
 tickers = ["AAPL", "MSFT", "BRO", "FAST", "ODFL"]
 
-# Streamlit UI
-#st.title("Backtesting Tool")
-
 # Add a negative margin to move "Our Strategy" closer
 st.markdown("<div style='margin-top: -100px;'></div>", unsafe_allow_html=True)
 
@@ -49,29 +46,24 @@ st.markdown("<br>", unsafe_allow_html=True)
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.markdown("<div style='font-size: 16px;'>Select a Ticker:</div>", unsafe_allow_html=True)
-    ticker = st.selectbox("", tickers, help="Choose one of the predefined tickers to test your strategy on.")
+    ticker = st.selectbox("Select a Ticker:", tickers, help="Choose one of the predefined tickers to test your strategy on.")
 
 with col2:
-    st.markdown("<div style='font-size: 16px;'>Start Date:</div>", unsafe_allow_html=True)
-    start_date = st.date_input("", value=datetime(2023, 1, 1), help="Select the date when the backtest should begin.")
+    start_date = st.date_input("Select a Start Date:", value=datetime(2023, 1, 1), help="Select the date when the backtest should begin.")
 
 with col3:
-    st.markdown("<div style='font-size: 16px;'>End Date:</div>", unsafe_allow_html=True)
-    end_date = st.date_input("", value=datetime(2023, 12, 31), help="Select the date when the backtest should end.")
+    end_date = st.date_input("Select and End Date:", value=datetime(2023, 12, 31), help="Select the date when the backtest should end.")
 
 
 # Layout: Second row with cash balance, take profit, and stop loss
 col4, col5, col6 = st.columns(3)
+
 with col4:
-    st.markdown("<div style='font-size: 16px;'>End Date:</div>", unsafe_allow_html=True)
     cash_balance = st.number_input("Cash Balance (USD):", min_value=0, value=10000, step=100, help="Enter the initial amount of cash available for trading.")
 with col5:
-    st.markdown("<div style='font-size: 16px;'>End Date:</div>", unsafe_allow_html=True)
-    take_profit = st.slider("Take Profit (%):", min_value=0.5, max_value=10.0, value=1.0, step=0.1, help="Define the percentage increase at which you want to sell and secure profits.")
+    take_profit = st.slider("Take Profit (%):", min_value=0.5, max_value=5.0, value=1.0, step=0.1, help="Define the percentage increase at which you want to sell and secure profits.")
 with col6:
-    st.markdown("<div style='font-size: 16px;'>End Date:</div>", unsafe_allow_html=True)
-    stop_loss = st.slider("Stop Loss (%):", min_value=0.5, max_value=10.0, value=1.0, step=0.1, help="Define the percentage decrease at which you want to sell to limit losses.")
+    stop_loss = st.slider("Stop Loss (%):", min_value=0.5, max_value=5.0, value=1.0, step=0.1, help="Define the percentage decrease at which you want to sell to limit losses.")
 
 # Backtest Button
 if st.button("Backtest"):
@@ -80,7 +72,7 @@ if st.button("Backtest"):
         result_df, html_content, log_info = utils.backtest([ticker], start_date, end_date, cash_balance, tp=take_profit/100, sl=stop_loss/100)
     
     st.subheader("Performance Chart")
-    components.html(html_content, height=700, scrolling=True)  # Embed directly
+    components.html(html_content, height=700, scrolling=True)  # Embed directly the Backtesting library HTML object
 
     st.subheader("Backtest Log")
     st.text(log_info)
