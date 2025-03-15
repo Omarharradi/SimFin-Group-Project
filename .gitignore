@@ -7,11 +7,13 @@
 *.DS_Store
 .DS_Store
 
+# Data Folder
+data/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-data/
 
 # C extensions
 *.so

@@ -96,7 +96,7 @@ It has many different folders:
         - [requirements.txt](streamlit_app/requirements.txt) file with all the libraries required for the app to work.
           - Note: This is the requirements.txt for the streamlit app, do not mix up with the dependencies you could install for your execution of the `master_pipeline.py` script.
     
-  - Also included a `.gitignore` file obtained from [gitignore.io](gitignore.io), and a few customized tweaks.
+  - Also included a `.gitignore` file obtained from [gitignore.io](https://gitignore.io), and a few customized tweaks.
 
 ### Live Web App
 Deployed in Streamlit cloud and accessed publicly [clicking here](https://g11-pda2-foresightx.streamlit.app/)
