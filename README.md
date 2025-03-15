@@ -31,7 +31,7 @@ It involves the development of an **Automated Daily Trading System** using Pytho
 - **Backtesting Module**: Given our trained model intelligence, you can select parameters to backtest your position holding strategy.
 - **Cloud Deployment**: Hosted on Streamlit cloud for public access.
 
-The last version of the application can be found [clicking here](SAOISIJFASJF)
+The last version of the application can be found [clicking here](https://g11-pda2-foresightx.streamlit.app/)
 
 ## Data Sources
 
@@ -83,7 +83,7 @@ Within this repository you will find the following deliverables:
   
   - Also included a .gitignore file obtained from [gitignore.io](gitignore.io), and a few customized tweaks.
 - **Live Web App:**
-  - Deployed in Streamlit cloud and accessed [clicking here](ASDASDAF)
+  - Deployed in Streamlit cloud and accessed [clicking here](https://g11-pda2-foresightx.streamlit.app/)
   - A [requirements.txt](streamlit_app/requirements.txt) file with all the libraries required
 - [**Executive summary**](Executive_Summary)
 - **Video Presentation**
