@@ -1,27 +1,12 @@
 import streamlit as st
 import utils 
-from PIL import Image, ImageOps, ImageDraw
+from PIL import Image
 
+#First line of the whole app needs to be the page config:
 utils.set_custom_page_config(title="Home - ForesightX", icon="\U0001F3E0")
 
-def crop_to_circle(image: Image.Image):
-    """Crops an image into a circular shape with smooth edges."""
-    size = min(image.size)  # Ensure the image is a square crop
-    mask = Image.new("L", (size, size), 0)  # Create a blank mask
-    draw = ImageDraw.Draw(mask)
-    draw.ellipse((0, 0, size, size), fill=255)  # Smooth circle mask
-
-    # Crop image to square first to ensure correct dimensions
-    image = ImageOps.fit(image, (size, size), centering=(0.5, 0.5))
-    
-    # Apply mask with antialiasing
-    circular_image = Image.new("RGBA", (size, size))
-    circular_image.paste(image, (0, 0), mask)
-
-    return circular_image
-
-
 def main():
+    # Apply overall styling to the page
     utils.hide_streamlit_sidebar()
     utils.navigation_bar()
     utils.apply_custom_styles()
@@ -87,7 +72,7 @@ def main():
     ]
     
     # Load, crop to circle, and resize images
-    resized_images = [crop_to_circle(Image.open(img)) for img in team_images]
+    resized_images = [utils.crop_to_circle(Image.open(img)) for img in team_images]
     
     # Adjust layout to properly center the second-row images with names
     col1, col2, col3 = st.columns([1, 1, 1])

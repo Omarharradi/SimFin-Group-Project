@@ -5,7 +5,7 @@ import requests
 from PIL import Image
 from io import BytesIO
 
-# Streamlit UI Config
+# Streamlit standardized UI look and feel:
 utils.set_custom_page_config(title="Company Overview - ForesightX", icon="🏢")
 utils.hide_streamlit_sidebar()
 utils.navigation_bar()
@@ -14,7 +14,7 @@ utils.display_company_header()
 
 st.markdown(f"<p style='color:white; font-size:24px;'>Get insights on companies by selecting a stock ticker below</p>", unsafe_allow_html=True)
 
-# Initialize API
+# Initialize API Wrapper for calling Company Info:
 API_KEY = "0ce27565-392d-4c49-a438-71e3b39f298f"
 simfin = utils.PySimFin(API_KEY)
 
@@ -31,13 +31,12 @@ ticker = st.selectbox("", tickers, index=0, key="selected_ticker")
 @st.cache_data(ttl=600)
 def fetch_ticker_logo(ticker):
     """
-    Fetches the ticker logo from the API. If the API fails, returns the fallback local image.
+    Fetches the ticker logo from the "logo.dev" API. If the API fails, returns a fallback local image.
     """
     try:
         # API Token
         API_TOKEN = "pk_RQPzczoCTlmAPlHQSCrzJw"
-        API_URL = "https://img.logo.dev/ticker/{ticker}?token=" + API_TOKEN + "&size=100" + "&format=png" #+ "&retina=true"
-        #Ref = https://img.logo.dev/ticker/MSFT?token=pk_RQPzczoCTlmAPlHQSCrzJw&size=300&format=png&retina=true
+        API_URL = "https://img.logo.dev/ticker/{ticker}?token=" + API_TOKEN + "&size=100" + "&format=png"
         response = requests.get(API_URL.format(ticker=ticker), timeout=5)
         if response.status_code == 200:
             return Image.open(BytesIO(response.content))  # Return the image directly
@@ -53,6 +52,7 @@ def fetch_ticker_logo(ticker):
 def fetch_company_data(ticker):
     return simfin.get_company_info([ticker])
 
+# Once a ticker is selected, parse the info obtained to a structued and nice readable content:
 if ticker:
     try:
         company_info = fetch_company_data(ticker)

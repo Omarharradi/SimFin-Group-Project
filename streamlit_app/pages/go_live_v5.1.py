@@ -8,7 +8,7 @@ import utils
 from utils import custom_label
 import time
 
-# Utils 
+# Utils for standardized look and feel:
 utils.set_custom_page_config(title="Prediction - ForesightX", icon="📊")
 utils.hide_streamlit_sidebar()
 utils.navigation_bar()
@@ -19,6 +19,7 @@ utils.display_predictor_header()
 API_KEY = "0ce27565-392d-4c49-a438-71e3b39f298f"
 simfin = utils.PySimFin(API_KEY)
 
+# Prediction data with cache (to execute it just once per session)
 @st.cache_data
 def get_cached_predictions():
     to_predict = simfin.get_predictions_data()
@@ -59,12 +60,13 @@ else:
 # Fetch stock data based on user selection
 if ticker and days:
     try:
-        if utils.is_trading_day():
-            # Get predictions from cache
+        if utils.is_trading_day(): #Understands if it is a trading day or not!
+            # Get predictions from cache only if today makes sense to predict
             predictions_df = get_cached_predictions()
             predicted_value = predictions_df.loc[predictions_df["Ticker"] == ticker, "Prediction"].values[0]
             market_movement = "go up 📈" if predicted_value >= 0.5 else "go down 📉"
 
+            # Banner displayed:
             st.markdown(
                 f"""
                 <style>
@@ -117,7 +119,7 @@ if ticker and days:
 
             st.write("Note: You can hover over the banner to know the model's predicted value")
 
-        else:
+        else: #Banner to show in case today there is no prediction because of market being closed:
             st.markdown(
                 f"""
                 <div style="background-color:#f0f0f0; padding:10px; border-radius:5px; text-align:center; font-size:16px; color:black;">
@@ -129,6 +131,7 @@ if ticker and days:
                 unsafe_allow_html=True
             )
 
+        # Gets the stock data through the wrapper for the selected ticker and days:
         stock_data = simfin.get_stock_prices([ticker], days=days)
         stock_data = stock_data.rename(columns={
             "Date": "date", "Opening Price": "open", "Highest Price": "high", 
@@ -146,6 +149,7 @@ if ticker and days:
             st.markdown("<h2 style='text-align: center;'>📊 Candlestick Chart with Volume</h2>", unsafe_allow_html=True)
             chart_placeholder = st.empty()
             
+            # Plots the candlestick chart:
             def plot_candlestick_chart(df):
                 df = df.dropna(subset=["open", "high", "low", "close"]).reset_index(drop=True)
                 fig = make_subplots(specs=[[{"secondary_y": True}]])
@@ -189,11 +193,13 @@ if ticker and days:
                 
                 return fig
             
+            # Stores the latest data with whatever gets retrieved, only updated when you change something from the selection:
             st.session_state.latest_data = stock_data
             
             while True:
+                # Gets into a loop to update every 20 seconds the real time data from Y finance
                 if utils.is_market_open():
-                    today_data = utils.fetch_latest_ohlc([ticker])
+                    today_data = utils.fetch_latest_ohlc([ticker]) # Calls yfinance API to obtain the ticker movements for today
                     if not today_data.empty:
                         today_data["date"] = datetime.now().strftime("%Y-%m-%d")
                         today_data = today_data.rename(columns={
@@ -214,4 +220,5 @@ if ticker and days:
                 time.sleep(20)  # Check every 10 seconds
 
     except Exception as e:
+        # Raises Exception when you move too fast through the page: Streamlit can easily execute more than 2 requests per second, prompting you to wait and retry! 
         st.error(f"❌ Error fetching stock data, the free version of the SimFin API has a limit of 2 requests per second. Refresh the page or select again!")

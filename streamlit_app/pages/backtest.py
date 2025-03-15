@@ -4,6 +4,7 @@ import utils
 import streamlit.components.v1 as components
 import time
 
+# Set the whole page to the standardized look and feel:
 utils.set_custom_page_config(title="📈 Backtest", icon="")
 utils.display_backtesting_header()
 utils.hide_streamlit_sidebar()
@@ -11,7 +12,7 @@ utils.navigation_bar()
 utils.apply_custom_styles()
 utils.hide_streamlit_sidebar()
 
-# Hardcoded list of tickers
+# The list of tickers:
 tickers = ["AAPL", "MSFT", "BRO", "FAST", "ODFL"]
 
 # Add a negative margin to move "Our Strategy" closer
@@ -69,10 +70,11 @@ with col6:
 if st.button("Backtest"):
     with st.spinner("🏃Running backtest... This may take a few seconds!🏃"):
         time.sleep(1)  # Small delay to show the spinner before processing
+        # Calls the backtesting function (packed with processing, reading and what not!) with the inputted parameters:
         result_df, html_content, log_info = utils.backtest([ticker], start_date, end_date, cash_balance, tp=take_profit/100, sl=stop_loss/100)
     
     st.subheader("Performance Chart")
-    components.html(html_content, height=700, scrolling=True)  # Embed directly the Backtesting library HTML object
+    components.html(html_content, height=700, scrolling=True)  # Embed the backtesting HTML object generated directly on Streamlit:
 
     st.subheader("Backtest Log")
     st.text(log_info)
