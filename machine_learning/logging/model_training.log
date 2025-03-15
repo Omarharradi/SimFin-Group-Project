@@ -1,0 +1,96 @@
+2025-03-15 16:55:46,522 - INFO - Script execution started.
+2025-03-15 16:55:46,523 - INFO - Loading data from processed_stock_data.csv.
+2025-03-15 16:55:46,543 - INFO - Data loaded successfully with 6050 rows and 35 columns.
+2025-03-15 16:55:46,544 - INFO - Feature and target variables prepared successfully.
+2025-03-15 16:55:46,544 - INFO - Starting XGBoost training.
+2025-03-15 16:55:46,545 - INFO - Computed class weights: [1.08035714 0.93076923].
+2025-03-15 16:55:46,548 - INFO - Data split into training (4840 samples) and testing (1210 samples).
+2025-03-15 16:55:46,672 - INFO - XGBoost parameters set.
+2025-03-15 16:55:46,672 - INFO - Starting model training with early stopping.
+2025-03-15 16:55:47,153 - INFO - Model training completed.
+2025-03-15 16:55:47,157 - INFO - Model Accuracy (Test): 0.6331
+2025-03-15 16:55:47,165 - INFO - Classification Report (Test):
+              precision    recall  f1-score   support
+
+         0.0       0.66      0.43      0.52       560
+         1.0       0.62      0.81      0.70       650
+
+    accuracy                           0.63      1210
+   macro avg       0.64      0.62      0.61      1210
+weighted avg       0.64      0.63      0.62      1210
+
+2025-03-15 16:55:47,170 - INFO - Model Accuracy (Train): 0.7124
+2025-03-15 16:55:47,176 - INFO - Model saved as 'xgb.joblib'.
+2025-03-15 16:55:47,178 - INFO - Model training completed successfully.
+2025-03-15 17:03:11,992 - INFO - Script execution started.
+2025-03-15 17:03:11,992 - INFO - Loading data from ./output\processed_stock_data.csv.
+2025-03-15 17:03:12,022 - INFO - Data loaded successfully with 6050 rows and 35 columns.
+2025-03-15 17:03:12,024 - INFO - Feature and target variables prepared successfully.
+2025-03-15 17:03:12,024 - INFO - Starting XGBoost training.
+2025-03-15 17:03:12,025 - INFO - Computed class weights: [1.08035714 0.93076923].
+2025-03-15 17:03:12,029 - INFO - Data split into training (4840 samples) and testing (1210 samples).
+2025-03-15 17:03:12,156 - INFO - XGBoost parameters set.
+2025-03-15 17:03:12,157 - INFO - Starting model training with early stopping.
+2025-03-15 17:03:12,655 - INFO - Model training completed.
+2025-03-15 17:03:12,658 - INFO - Model Accuracy (Test): 0.6331
+2025-03-15 17:03:12,666 - INFO - Classification Report (Test):
+              precision    recall  f1-score   support
+
+         0.0       0.66      0.43      0.52       560
+         1.0       0.62      0.81      0.70       650
+
+    accuracy                           0.63      1210
+   macro avg       0.64      0.62      0.61      1210
+weighted avg       0.64      0.63      0.62      1210
+
+2025-03-15 17:03:12,672 - INFO - Model Accuracy (Train): 0.7124
+2025-03-15 17:03:12,680 - INFO - Model saved at ./output\xgb.joblib.
+2025-03-15 17:03:12,681 - INFO - Model training completed successfully.
+2025-03-15 17:05:34,921 - INFO - Script execution started.
+2025-03-15 17:05:34,921 - INFO - Loading data from ./output\processed_stock_data.csv.
+2025-03-15 17:05:34,950 - INFO - Data loaded successfully with 6050 rows and 35 columns.
+2025-03-15 17:05:34,951 - INFO - Feature and target variables prepared successfully.
+2025-03-15 17:05:34,951 - INFO - Starting XGBoost training.
+2025-03-15 17:05:34,953 - INFO - Computed class weights: [1.08035714 0.93076923].
+2025-03-15 17:05:34,956 - INFO - Data split into training (4840 samples) and testing (1210 samples).
+2025-03-15 17:05:35,080 - INFO - XGBoost parameters set.
+2025-03-15 17:05:35,080 - INFO - Starting model training with early stopping.
+2025-03-15 17:05:35,507 - INFO - Model training completed.
+2025-03-15 17:05:35,510 - INFO - Model Accuracy (Test): 0.6331
+2025-03-15 17:05:35,518 - INFO - Classification Report (Test):
+              precision    recall  f1-score   support
+
+         0.0       0.66      0.43      0.52       560
+         1.0       0.62      0.81      0.70       650
+
+    accuracy                           0.63      1210
+   macro avg       0.64      0.62      0.61      1210
+weighted avg       0.64      0.63      0.62      1210
+
+2025-03-15 17:05:35,522 - INFO - Model Accuracy (Train): 0.7124
+2025-03-15 17:05:35,529 - INFO - Model saved at ./output\xgb.joblib.
+2025-03-15 17:05:35,531 - INFO - Model training completed successfully.
+2025-03-15 17:07:45,844 - INFO - Script execution started.
+2025-03-15 17:07:45,844 - INFO - Loading data from ./output\processed_stock_data.csv.
+2025-03-15 17:07:45,874 - INFO - Data loaded successfully with 6050 rows and 35 columns.
+2025-03-15 17:07:45,875 - INFO - Feature and target variables prepared successfully.
+2025-03-15 17:07:45,875 - INFO - Starting XGBoost training.
+2025-03-15 17:07:45,877 - INFO - Computed class weights: [1.08035714 0.93076923].
+2025-03-15 17:07:45,881 - INFO - Data split into training (4840 samples) and testing (1210 samples).
+2025-03-15 17:07:46,007 - INFO - XGBoost parameters set.
+2025-03-15 17:07:46,008 - INFO - Starting model training with early stopping.
+2025-03-15 17:07:46,436 - INFO - Model training completed.
+2025-03-15 17:07:46,439 - INFO - Model Accuracy (Test): 0.6331
+2025-03-15 17:07:46,447 - INFO - Classification Report (Test):
+              precision    recall  f1-score   support
+
+         0.0       0.66      0.43      0.52       560
+         1.0       0.62      0.81      0.70       650
+
+    accuracy                           0.63      1210
+   macro avg       0.64      0.62      0.61      1210
+weighted avg       0.64      0.63      0.62      1210
+
+2025-03-15 17:07:46,451 - INFO - Model Accuracy (Train): 0.7124
+2025-03-15 17:07:46,457 - INFO - Model saved at ./output\xgb.joblib.
+2025-03-15 17:07:46,458 - INFO - Model training completed successfully.

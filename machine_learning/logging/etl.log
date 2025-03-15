@@ -1,0 +1,90 @@
+2025-03-15 17:02:43,373 - INFO - Script execution started.
+2025-03-15 17:02:43,373 - INFO - Starting stock data processing.
+2025-03-15 17:02:43,374 - INFO - Loading stock data from ZIP file.
+2025-03-15 17:02:48,083 - INFO - Stock data loaded successfully with 5768313 rows and 11 columns.
+2025-03-15 17:02:48,084 - INFO - Filtering data for tickers: ['AAPL', 'MSFT', 'BRO', 'FAST', 'ODFL'].
+2025-03-15 17:02:48,252 - INFO - Filtered data contains 6200 rows.
+2025-03-15 17:02:48,253 - INFO - Dropped unnecessary columns: Dividend, SimFinId.
+2025-03-15 17:02:48,256 - INFO - Sorted data by Ticker and Date.
+2025-03-15 17:02:48,256 - INFO - Removing last 30 rows per Ticker.
+2025-03-15 17:02:48,260 - INFO - Cleaned data contains 6050 rows after removing last 30 rows per ticker.
+2025-03-15 17:02:48,260 - INFO - Creating pivot table.
+2025-03-15 17:02:48,266 - INFO - Pivot table created with 1210 rows and 30 columns.
+2025-03-15 17:02:48,267 - INFO - Flattened column names in pivot table.
+2025-03-15 17:02:48,267 - INFO - Merging pivoted data with original data.
+2025-03-15 17:02:48,270 - INFO - Merged data contains 6050 rows and 39 columns.
+2025-03-15 17:02:48,271 - INFO - Dropped columns: ['Open', 'High', 'Low', 'Close', 'Adj. Close', 'Volume'].
+2025-03-15 17:02:48,271 - INFO - Initialized Close_Ticker_Shifted column.
+2025-03-15 17:02:48,272 - INFO - Processing ticker AAPL.
+2025-03-15 17:02:48,276 - INFO - Computed Target column for ticker AAPL.
+2025-03-15 17:02:48,276 - INFO - Processing ticker BRO.
+2025-03-15 17:02:48,279 - INFO - Computed Target column for ticker BRO.
+2025-03-15 17:02:48,279 - INFO - Processing ticker FAST.
+2025-03-15 17:02:48,282 - INFO - Computed Target column for ticker FAST.
+2025-03-15 17:02:48,282 - INFO - Processing ticker MSFT.
+2025-03-15 17:02:48,284 - INFO - Computed Target column for ticker MSFT.
+2025-03-15 17:02:48,284 - INFO - Processing ticker ODFL.
+2025-03-15 17:02:48,287 - INFO - Computed Target column for ticker ODFL.
+2025-03-15 17:02:48,288 - INFO - Converted Close_Ticker_Shifted column to numeric type.
+2025-03-15 17:02:48,288 - INFO - Stock data processing completed successfully.
+2025-03-15 17:02:48,459 - INFO - Processed stock data saved successfully at ./output\processed_stock_data.csv.
+2025-03-15 17:05:28,709 - INFO - Script execution started.
+2025-03-15 17:05:28,710 - INFO - Starting stock data processing.
+2025-03-15 17:05:28,710 - INFO - Loading stock data from ZIP file.
+2025-03-15 17:05:33,084 - INFO - Stock data loaded successfully with 5768313 rows and 11 columns.
+2025-03-15 17:05:33,084 - INFO - Filtering data for tickers: ['AAPL', 'MSFT', 'BRO', 'FAST', 'ODFL'].
+2025-03-15 17:05:33,233 - INFO - Filtered data contains 6200 rows.
+2025-03-15 17:05:33,234 - INFO - Dropped unnecessary columns: Dividend, SimFinId.
+2025-03-15 17:05:33,236 - INFO - Sorted data by Ticker and Date.
+2025-03-15 17:05:33,236 - INFO - Removing last 30 rows per Ticker.
+2025-03-15 17:05:33,240 - INFO - Cleaned data contains 6050 rows after removing last 30 rows per ticker.
+2025-03-15 17:05:33,240 - INFO - Creating pivot table.
+2025-03-15 17:05:33,245 - INFO - Pivot table created with 1210 rows and 30 columns.
+2025-03-15 17:05:33,246 - INFO - Flattened column names in pivot table.
+2025-03-15 17:05:33,246 - INFO - Merging pivoted data with original data.
+2025-03-15 17:05:33,248 - INFO - Merged data contains 6050 rows and 39 columns.
+2025-03-15 17:05:33,249 - INFO - Dropped columns: ['Open', 'High', 'Low', 'Close', 'Adj. Close', 'Volume'].
+2025-03-15 17:05:33,249 - INFO - Initialized Close_Ticker_Shifted column.
+2025-03-15 17:05:33,249 - INFO - Processing ticker AAPL.
+2025-03-15 17:05:33,253 - INFO - Computed Target column for ticker AAPL.
+2025-03-15 17:05:33,253 - INFO - Processing ticker BRO.
+2025-03-15 17:05:33,256 - INFO - Computed Target column for ticker BRO.
+2025-03-15 17:05:33,256 - INFO - Processing ticker FAST.
+2025-03-15 17:05:33,259 - INFO - Computed Target column for ticker FAST.
+2025-03-15 17:05:33,259 - INFO - Processing ticker MSFT.
+2025-03-15 17:05:33,262 - INFO - Computed Target column for ticker MSFT.
+2025-03-15 17:05:33,263 - INFO - Processing ticker ODFL.
+2025-03-15 17:05:33,266 - INFO - Computed Target column for ticker ODFL.
+2025-03-15 17:05:33,266 - INFO - Converted Close_Ticker_Shifted column to numeric type.
+2025-03-15 17:05:33,266 - INFO - Stock data processing completed successfully.
+2025-03-15 17:05:33,416 - INFO - Processed stock data saved successfully at ./output\processed_stock_data.csv.
+2025-03-15 17:07:39,700 - INFO - Script execution started.
+2025-03-15 17:07:39,700 - INFO - Starting stock data processing.
+2025-03-15 17:07:39,700 - INFO - Loading stock data from ZIP file.
+2025-03-15 17:07:44,038 - INFO - Stock data loaded successfully with 5768313 rows and 11 columns.
+2025-03-15 17:07:44,038 - INFO - Filtering data for tickers: ['AAPL', 'MSFT', 'BRO', 'FAST', 'ODFL'].
+2025-03-15 17:07:44,189 - INFO - Filtered data contains 6200 rows.
+2025-03-15 17:07:44,190 - INFO - Dropped unnecessary columns: Dividend, SimFinId.
+2025-03-15 17:07:44,192 - INFO - Sorted data by Ticker and Date.
+2025-03-15 17:07:44,193 - INFO - Removing last 30 rows per Ticker.
+2025-03-15 17:07:44,196 - INFO - Cleaned data contains 6050 rows after removing last 30 rows per ticker.
+2025-03-15 17:07:44,196 - INFO - Creating pivot table.
+2025-03-15 17:07:44,200 - INFO - Pivot table created with 1210 rows and 30 columns.
+2025-03-15 17:07:44,201 - INFO - Flattened column names in pivot table.
+2025-03-15 17:07:44,201 - INFO - Merging pivoted data with original data.
+2025-03-15 17:07:44,204 - INFO - Merged data contains 6050 rows and 39 columns.
+2025-03-15 17:07:44,204 - INFO - Dropped columns: ['Open', 'High', 'Low', 'Close', 'Adj. Close', 'Volume'].
+2025-03-15 17:07:44,205 - INFO - Initialized Close_Ticker_Shifted column.
+2025-03-15 17:07:44,205 - INFO - Processing ticker AAPL.
+2025-03-15 17:07:44,209 - INFO - Computed Target column for ticker AAPL.
+2025-03-15 17:07:44,209 - INFO - Processing ticker BRO.
+2025-03-15 17:07:44,212 - INFO - Computed Target column for ticker BRO.
+2025-03-15 17:07:44,212 - INFO - Processing ticker FAST.
+2025-03-15 17:07:44,215 - INFO - Computed Target column for ticker FAST.
+2025-03-15 17:07:44,215 - INFO - Processing ticker MSFT.
+2025-03-15 17:07:44,218 - INFO - Computed Target column for ticker MSFT.
+2025-03-15 17:07:44,218 - INFO - Processing ticker ODFL.
+2025-03-15 17:07:44,221 - INFO - Computed Target column for ticker ODFL.
+2025-03-15 17:07:44,221 - INFO - Converted Close_Ticker_Shifted column to numeric type.
+2025-03-15 17:07:44,221 - INFO - Stock data processing completed successfully.
+2025-03-15 17:07:44,360 - INFO - Processed stock data saved successfully at ./output\processed_stock_data.csv.

@@ -1,0 +1,42 @@
+2025-03-15 17:05:28,047 - INFO - Pipeline execution started.
+2025-03-15 17:05:28,047 - INFO - Starting execution of etl.py.
+2025-03-15 17:05:33,484 - INFO - Execution of etl.py completed successfully.
+2025-03-15 17:05:33,484 - INFO - Output:
+Processed stock data saved successfully at ./output\processed_stock_data.csv.
+
+2025-03-15 17:05:33,484 - INFO - Starting execution of model_training.py.
+2025-03-15 17:05:35,712 - INFO - Execution of model_training.py completed successfully.
+2025-03-15 17:05:35,712 - INFO - Output:
+[0]	train-logloss:0.68950	eval-logloss:0.68990
+[50]	train-logloss:0.65825	eval-logloss:0.67239
+[100]	train-logloss:0.64070	eval-logloss:0.66276
+[150]	train-logloss:0.63231	eval-logloss:0.65827
+[200]	train-logloss:0.62948	eval-logloss:0.65695
+[250]	train-logloss:0.62828	eval-logloss:0.65617
+[300]	train-logloss:0.62736	eval-logloss:0.65574
+[350]	train-logloss:0.62674	eval-logloss:0.65531
+[391]	train-logloss:0.62657	eval-logloss:0.65520
+Model training completed successfully. Model saved at ./output\xgb.joblib.
+
+2025-03-15 17:05:35,712 - INFO - Pipeline execution completed successfully.
+2025-03-15 17:07:39,040 - INFO - Pipeline execution started.
+2025-03-15 17:07:39,041 - INFO - Starting execution of etl.py.
+2025-03-15 17:07:44,434 - INFO - Execution of etl.py completed successfully.
+2025-03-15 17:07:44,434 - INFO - Output:
+Processed stock data saved successfully at ./output\processed_stock_data.csv.
+
+2025-03-15 17:07:44,435 - INFO - Starting execution of model_training.py.
+2025-03-15 17:07:46,631 - INFO - Execution of model_training.py completed successfully.
+2025-03-15 17:07:46,632 - INFO - Output:
+[0]	train-logloss:0.68950	eval-logloss:0.68990
+[50]	train-logloss:0.65825	eval-logloss:0.67239
+[100]	train-logloss:0.64070	eval-logloss:0.66276
+[150]	train-logloss:0.63231	eval-logloss:0.65827
+[200]	train-logloss:0.62948	eval-logloss:0.65695
+[250]	train-logloss:0.62828	eval-logloss:0.65617
+[300]	train-logloss:0.62736	eval-logloss:0.65574
+[350]	train-logloss:0.62674	eval-logloss:0.65531
+[391]	train-logloss:0.62657	eval-logloss:0.65520
+Model training completed successfully. Model saved at ./output\xgb.joblib.
+
+2025-03-15 17:07:46,632 - INFO - Master Pipeline execution completed successfully.

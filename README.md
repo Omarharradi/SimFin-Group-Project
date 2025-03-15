@@ -7,7 +7,11 @@ Group 11: Omar Harradi, Laura Silva, Ignacio Amigó, Afonso Santos, Lucas Ihnen
     - [2. Web-Based Live App](#2-web-based-live-app)
   - [Data Sources](#data-sources)
   - [Technologies Used](#technologies-used)
-  - [Deliverables:](#deliverables)
+  - [Deliverables](#deliverables)
+    - [GitHub Repository](#github-repository)
+    - [Live Web App](#live-web-app)
+    - [Executive summary](#executive-summary)
+    - [Video Presentation](#video-presentation)
    
 ## Overview
 This project is made for the Python for Data Analytics II class on the IE University's Master for Business Analytics and Data Science.
@@ -19,7 +23,7 @@ It involves the development of an **Automated Daily Trading System** using Pytho
 
 ### 1. Data Analytics Module
 
-- **ETL Pipeline**: Extracts, transforms, and loads stock market data from SimFin.
+- **ETL Pipeline**: Extracts, transforms, and loads stock market data from SimFin. 
 - **Machine Learning Model**: Predicts market movement (price rise or fall) for the next trading session.
 - **Trading Strategy**: Implements a trading decision mechanism based on the model’s predictions.
 
@@ -57,39 +61,55 @@ The project utilizes the following data sources:
 - **Logo.dev API** (for high quality logo retrieval)
 - **Matplotlib / Plotly / SeaBorn / Backtesting** (for data visualization)
 
-## Deliverables:
-Within this repository you will find the following deliverables:
-- **GitHub Repository:**
-  - You are standing in it now!
-  - The different folders:
-    - machine_learning:
-      - a
-      - a
-      - a
-      - a
-    - resources:
+## Deliverables
+### GitHub Repository
+It has many different folders:
+  - **machine_learning/** *(Main folder containing all machine learning pipeline scripts)*
+    - `etl.py` → Extracts, transforms, and loads stock price data from the `data/` folder.
+    - `model_training.py` → Trains an XGBoost model using processed data, obtained from the `etl.py` script.
+    - `master_pipeline.py` → Orchestrates the execution of both `etl.py` and `model_training.py` in sequence.
+    - `logging/` → Stores logs for each script to track execution and debugging.
+    - `output/` → Stores the generated objects for the ETL and Model Training Scripts!
+    - A `requirements_master.txt` file is included for easy dependencies setup. Install them using
+      ```sh
+      pip install -r requirements_master.txt
+      ```
+  - **data/** *(Required for the ETL script)*
+    - **Make sure the following files are present before running `etl.py`:**
+      - `us-companies.zip`
+      - `us-shareprices-daily.zip`
+    - These files can be downloaded from the **Bulk Download section** of the **SimFin API**.
+    - These files are not uploaded in this repository because of their size and are also ignored within the `.gitignore` file.
+  - **resources/**:
       - Folder to organize whatever doesnt fit in the other two, like reference code we tried out and the instructions for the assignment
-    - streamlit_app:
+  - **streamlit_app/**:
       - contains the complete structure for the streamlit app deployment with the best practices:
         - ```home.py```: main file for the app to exist
         - ```./pages/```: contains the sub-pages for the streamlit app 
-          - ```backtest.py```
-          - ```company_info_v1.py```
-          - ```go_live_v5.1.py```
+          - ```backtest.py```: For our backtesting strategy
+          - ```company_info_v1.py```: Reviewing company ticker information
+          - ```go_live_v5.1.py```: Main functionality of our app, considering both historical and real time financial data as well as a live prediction
         - ```./resources/"```:
           - deprecated: where we left all previous versions of the pages developed
           - images: all images required for the app to work 
           - model: contains the XGBoost model object trained in the machine_learning folder for the app to make live predictions
+        - [requirements.txt](streamlit_app/requirements.txt) file with all the libraries required for the app to work.
+          - Note: This is the requirements.txt for the streamlit app, do not mix up with the dependencies you could install for your execution of the `master_pipeline.py` script.
+    
+  - Also included a `.gitignore` file obtained from [gitignore.io](gitignore.io), and a few customized tweaks.
+
+### Live Web App
+Deployed in Streamlit cloud and accessed publicly [clicking here](https://g11-pda2-foresightx.streamlit.app/)
+
+
+### Executive summary
+To have a quick read about everything we created on this project, refer to our [Executive Summary documentation](PDA2_G11_Executive_Summary.pdf) which can also be found within this repository!
   
-  - Also included a .gitignore file obtained from [gitignore.io](gitignore.io), and a few customized tweaks.
-- **Live Web App:**
-  - Deployed in Streamlit cloud and accessed [clicking here](https://g11-pda2-foresightx.streamlit.app/)
-  - A [requirements.txt](streamlit_app/requirements.txt) file with all the libraries required
-- [**Executive summary**](Executive_Summary)
-- **Video Presentation**
+### Video Presentation
   - The video recorded was uploaded to a Google Drive folder and made publicly available [in this link](https://drive.google.com/drive/folders/1Q3PMHrujXyme3BMmPqNvwbcuoiVDUuBi?usp=sharing)
     - The video contains a summary of part 1 and a live demo of our application working!
     - There is also a second video that showcases how our app is able to capture real time trading data when the market is open! (same folder)
+    - Lastly, a screenshot on how it looks when the market is closed and no predictions are showed.
   - The presentation used is also within this repository, [click here to see it](PDA2_G11_SlideDeck.pdf)
 
 
