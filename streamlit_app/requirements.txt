@@ -1,0 +1,11 @@
+streamlit
+pillow
+pandas
+numpy
+plotly
+yfinance
+pytz
+requests
+xgboost
+joblib
+backtesting
