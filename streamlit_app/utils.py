@@ -278,25 +278,61 @@ def apply_custom_styles():
     st.markdown(
         """
         <style>
-            .stApp {
-                background-color: #002149;
+            /* Light Mode */
+            @media (prefers-color-scheme: light) {
+                body, .stApp {
+                    background-color: #ffffff;
+                    color: black !important;
+                }
+                h1, h2, h3, label {
+                    color: #002149 !important;  /* Ensures readability */
+                }
+                .stSlider label {
+                    color: #002149 !important;  /* Slider title stays visible */
+                }
+                /* Tooltip (Help icon) - Always white */
+                [data-testid="stTooltipIcon"] svg {
+                color: white !important;  /* Keeps only the '?' icon white */
+                fill: white !important; 
+                }
+                /* Button Text */
+                .stButton>button {
+                    background-color: #05CC77 !important; /* Green button */
+                    color: white !important;  /* Ensures button text is visible */
+                    font-weight: bold;
+                    border-radius: 5px;
+                }
+                .stButton>button:hover {
+                    background-color: #04A76F !important;
+                }
             }
-            .stButton>button {
-                background-color: #05CC77 !important;
-                color: white !important;
-                font-weight: bold;
-                border-radius: 5px;
-            }
-            .stButton>button:hover {
-                background-color: #04A76F !important;
-            }
-            h1, h2, h3 {
-                color: #34ABA2 !important;  /* Changed to teal */
-            }
-            .stTextInput>div>div>input {
-                background-color: #004080;
-                color: white;
-                border-radius: 5px;
+
+            /* Dark Mode */
+            @media (prefers-color-scheme: dark) {
+                body, .stApp {
+                    background-color: #002149;
+                    color: white !important;
+                }
+                h1, h2, h3, label {
+                    color: #34ABA2 !important;
+                }
+                .stSlider label {
+                    color: white !important;
+                }
+                /* Tooltip (Help icon) */
+                [data-testid="stTooltipIcon"] {
+                    color: white !important; /* White tooltip in dark mode */
+                }
+                /* Button Text */
+                .stButton>button {
+                    background-color: #05CC77 !important;
+                    color: white !important;  /* Ensures button text stays visible */
+                    font-weight: bold;
+                    border-radius: 5px;
+                }
+                .stButton>button:hover {
+                    background-color: #04A76F !important;
+                }
             }
         </style>
         """,
