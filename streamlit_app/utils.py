@@ -620,10 +620,10 @@ def display_home_header(logo_path="resources/images/logo.png"):
         f"""
         <div style="display: flex; align-items: center; justify-content: center; gap: 0px;">
             <img src="data:image/png;base64,{logo_base64}" width="300">
-            <h1 style="font-size: 60px; font-weight: bold; color: #F2F3F4;">Welcome to ForesightX</h1>
+            <h1 style="font-size: 60px; font-weight: bold;">Welcome to ForesightX</h1>
         </div>
         <hr style="border: 1px solid #F2F3F4;">
-        <div style="text-align: center; font-size: 35px; font-weight: bold; color:white;">Your AI-Powered Stock Prediction Assistant!</div>
+        <div style="text-align: center; font-size: 35px; font-weight: bold;">Your AI-Powered Stock Prediction Assistant!</div>
         <hr style="border: 1px solid #F2F3F4;">
         """,
         unsafe_allow_html=True
@@ -638,7 +638,7 @@ def display_company_header(logo_path="resources/images/logo.png"):
         f"""
         <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
             <img src="data:image/png;base64,{logo_base64}" width="300">
-            <h1 style="font-size: 60px; font-weight: bold; color: #F2F3F4;">Company Overview</h1>
+            <h1 style="font-size: 60px; font-weight: bold;">Company Overview</h1>
         </div>
         <hr style="border: 1px solid #F2F3F4;">
         """,
@@ -662,7 +662,7 @@ def display_backtesting_header(logo_path="resources/images/logo.png"):
         f"""
         <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
             <img src="data:image/png;base64,{logo_base64}" width="300">
-            <h1 style="font-size: 60px; font-weight: bold; color: #F2F3F4; margin-bottom: 10px;">Backtesting Tool</h1>
+            <h1 style="font-size: 60px; font-weight: bold; margin-bottom: 10px;">Backtesting Tool</h1>
         </div>
         <hr style="border: 1px solid #F2F3F4; margin-top: 5px; margin-bottom: 5px;">
         """,
@@ -679,7 +679,7 @@ def display_predictor_header(logo_path="resources/images/logo.png"):
         f"""
         <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
             <img src="data:image/png;base64,{logo_base64}" width="300">
-            <h1 style="font-size: 60px; font-weight: bold; color: #F2F3F4;">Go Live - Stock Analysis</h1>
+            <h1 style="font-size: 60px; font-weight: bold;">Go Live - Stock Analysis</h1>
         </div>
         <hr style="border: 1px solid #F2F3F4;">
         """,

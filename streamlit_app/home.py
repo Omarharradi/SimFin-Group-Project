@@ -9,7 +9,7 @@ def main():
     # Apply overall styling to the page
     utils.hide_streamlit_sidebar()
     utils.navigation_bar()
-    utils.apply_custom_styles()
+    #utils.apply_custom_styles()
     utils.display_home_header()
     utils.hide_streamlit_sidebar()
     

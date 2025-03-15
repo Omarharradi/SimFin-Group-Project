@@ -12,7 +12,7 @@ import time
 utils.set_custom_page_config(title="Prediction - ForesightX", icon="📊")
 utils.hide_streamlit_sidebar()
 utils.navigation_bar()
-utils.apply_custom_styles()
+#utils.apply_custom_styles()
 utils.display_predictor_header()
 
 # Initialize API

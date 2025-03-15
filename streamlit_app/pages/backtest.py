@@ -5,11 +5,11 @@ import streamlit.components.v1 as components
 import time
 
 # Set the whole page to the standardized look and feel:
-utils.set_custom_page_config(title="📈 Backtest", icon="")
+utils.set_custom_page_config(title="Backtest - ForesightX", icon="📈")
 utils.display_backtesting_header()
 utils.hide_streamlit_sidebar()
 utils.navigation_bar()
-utils.apply_custom_styles()
+#utils.apply_custom_styles()
 utils.hide_streamlit_sidebar()
 
 # The list of tickers:

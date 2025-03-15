@@ -9,10 +9,10 @@ from io import BytesIO
 utils.set_custom_page_config(title="Company Overview - ForesightX", icon="🏢")
 utils.hide_streamlit_sidebar()
 utils.navigation_bar()
-utils.apply_custom_styles()
+#utils.apply_custom_styles()
 utils.display_company_header()
 
-st.markdown(f"<p style='color:white; font-size:24px;'>Get insights on companies by selecting a stock ticker below</p>", unsafe_allow_html=True)
+st.markdown(f"<p style='font-size:24px;'>Get insights on companies by selecting a stock ticker below</p>", unsafe_allow_html=True)
 
 # Initialize API Wrapper for calling Company Info:
 API_KEY = "0ce27565-392d-4c49-a438-71e3b39f298f"
@@ -71,17 +71,17 @@ if ticker:
             with col1:
                 st.image(logo, width=100)
             with col2:
-                st.markdown(f"<h2 style='color:white;'>{company_name}</h2>", unsafe_allow_html=True)
+                st.markdown(f"<h2 style=''>{company_name}</h2>", unsafe_allow_html=True)
 
             # Display company details with styling
             st.markdown("### <span style='color:#2C9795;'>US Registration Number:</span>", unsafe_allow_html=True)
-            st.markdown(f"<p style='color:white; font-size:21px;'>{registration_number}</p>", unsafe_allow_html=True)
+            st.markdown(f"<p style=' font-size:21px;'>{registration_number}</p>", unsafe_allow_html=True)
             
             st.markdown("### <span style='color:#2C9795;'>Number of Employees:</span>", unsafe_allow_html=True)
-            st.markdown(f"<p style='color:white; font-size:18px;'>{employees:,}</p>", unsafe_allow_html=True)
+            st.markdown(f"<p style=' font-size:18px;'>{employees:,}</p>", unsafe_allow_html=True)
             
             st.markdown("### <span style='color:#2C9795;'>About:</span>", unsafe_allow_html=True)
-            st.markdown(f"<p style='color:white; font-size:18px;'>{about}</p>", unsafe_allow_html=True)
+            st.markdown(f"<p style=' font-size:18px;'>{about}</p>", unsafe_allow_html=True)
     
     except Exception as e:
         st.error(f"Error loading company information: {str(e)}")
